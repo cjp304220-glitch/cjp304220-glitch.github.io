@@ -1,0 +1,51 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to Stream an RTSP Camera to Your Browser with WebRTC | CodeCrumbs</title>
+<meta name="description" content="Browsers can&#x27;t play RTSP directly. Here&#x27;s how to bridge an IP camera to a web page with low latency using WebRTC.">
+<link rel="canonical" href="https://cjp304220-glitch.github.io/posts/rtsp-camera-to-browser-webrtc.html">
+<meta property="og:title" content="How to Stream an RTSP Camera to Your Browser with WebRTC | CodeCrumbs"><meta property="og:description" content="Browsers can&#x27;t play RTSP directly. Here&#x27;s how to bridge an IP camera to a web page with low latency using WebRTC."><meta property="og:type" content="website">
+<link rel="stylesheet" href="/style.css">
+<!-- AdSense: set adsense_pub_id in config.json and rebuild -->
+</head><body>
+<header><div class="wrap bar"><a class="logo" href="/">Code<span>Crumbs</span></a>
+<nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
+<main class="wrap"><article><h1>How to Stream an RTSP Camera to Your Browser with WebRTC</h1><p class="meta">By Naresh · October 13, 2026 · <a href="/category/tutorials.html">Tutorials</a></p>
+<p>Most IP cameras and CCTV DVRs speak <b>RTSP</b>. Browsers don't. If you open <code>rtsp://192.168.1.20:554/stream1</code> in Chrome, nothing happens. To show a live camera on a web page you need a small server in between that converts RTSP into something the browser understands.</p>
+<p>This guide explains the options and walks through the quickest working setup.</p>
+<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<h2>Your three options</h2>
+<table><tr><th>Method</th><th>Latency</th><th>Good for</th></tr>
+<tr><td>HLS</td><td>Several seconds</td><td>Many viewers, simple CDN hosting</td></tr>
+<tr><td>MJPEG / snapshots</td><td>Low, but heavy bandwidth</td><td>Quick prototypes</td></tr>
+<tr><td><b>WebRTC</b></td><td>Under a second</td><td>Live monitoring, PTZ control, doorbells</td></tr></table>
+<p>For anything "live", WebRTC is the right choice.</p>
+<h2>The quickest working setup: MediaMTX</h2>
+<p><a href="https://github.com/bluenviron/mediamtx" target="_blank" rel="noopener">MediaMTX</a> is a free, single-binary media server that reads RTSP and serves WebRTC out of the box.</p>
+<p><b>1. Download</b> the release for your OS from its GitHub page and unzip it.</p>
+<p><b>2. Add your camera</b> to <code>mediamtx.yml</code>:</p>
+<pre><code>paths:
+  cam1:
+    source: rtsp://user:pass@192.168.1.20:554/stream1</code></pre>
+<p><b>3. Run it:</b></p>
+<pre><code>./mediamtx</code></pre>
+<p><b>4. Open</b> <code>http://localhost:8889/cam1</code> in your browser. You should see the live feed.</p>
+<h2>Embedding it in your own page</h2>
+<p>The simplest way is an iframe pointing at the MediaMTX player:</p>
+<pre><code>&lt;iframe src="http://YOUR-SERVER:8889/cam1"
+        width="640" height="360" allow="autoplay"&gt;&lt;/iframe&gt;</code></pre>
+<p>For full control (custom UI, multiple cameras, recording), you'll talk to the server with the WHEP protocol from JavaScript.</p>
+<h2>Common problems</h2>
+<ul>
+<li><b>Black screen:</b> the camera may send H.265. Most browsers need H.264, so switch the camera's encoding in its settings.</li>
+<li><b>Works on LAN, not outside:</b> WebRTC needs UDP ports open, or a TURN server.</li>
+<li><b>Wrong RTSP URL:</b> test it first in VLC (Media → Open Network Stream).</li>
+</ul>
+<div class="cta"><b>Want the full step-by-step build?</b>
+<p>My ebook <i>Camera to Browser</i> walks through a complete RTSP-to-WebRTC setup, with working code and troubleshooting.</p>
+<a class="btn" href="https://nareshbh.gumroad.com/l/pltyzu" target="_blank" rel="noopener">Get the ebook</a></div>
+<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Tutorials</h2><ul><li><a href="/posts/vs-code-extensions-that-save-time.html">10 VS Code Extensions That Save Time Every Day</a></li><li><a href="/posts/build-ai-security-camera-webrtc.html">Build Your Own AI Security Camera with WebRTC (Step by Step)</a></li></ul></article></main>
+<footer><div class="wrap">
+<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a>
+<p>&copy; 2026 CodeCrumbs. All rights reserved.</p></div></footer>
+</body></html>

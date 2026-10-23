@@ -1,0 +1,1 @@
+# Set adsense_pub_id in config.json (e.g. pub-1234567890123456) and rebuild

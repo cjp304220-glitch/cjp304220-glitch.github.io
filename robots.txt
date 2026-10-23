@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://cjp304220-glitch.github.io/sitemap.xml
