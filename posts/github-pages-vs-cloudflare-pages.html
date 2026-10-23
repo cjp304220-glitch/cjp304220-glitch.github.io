@@ -1,0 +1,49 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GitHub Pages vs Cloudflare Pages in 2026: Which Free Host Fits Your Site? | CodeCrumbs</title>
+<meta name="description" content="Both are free forever and serve static sites over HTTPS. A practical comparison of limits, deploy flow and URL behavior, plus which one to pick for a blog, docs or a portfolio.">
+<link rel="canonical" href="https://codecrumbs.pages.dev/posts/github-pages-vs-cloudflare-pages">
+<meta property="og:title" content="GitHub Pages vs Cloudflare Pages in 2026: Which Free Host Fits Your Site? | CodeCrumbs"><meta property="og:description" content="Both are free forever and serve static sites over HTTPS. A practical comparison of limits, deploy flow and URL behavior, plus which one to pick for a blog, docs or a portfolio."><meta property="og:type" content="website">
+<link rel="stylesheet" href="/style.css">
+<meta name="google-site-verification" content="9x7RghWpi0kminI4rFGYUH-Tx90gLiBHoBJuTrwSBMY">
+
+<!-- AdSense: set adsense_pub_id in config.json and rebuild -->
+</head><body>
+<header><div class="wrap bar"><a class="logo" href="/">Code<span>Crumbs</span></a>
+<nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
+<main class="wrap"><article><h1>GitHub Pages vs Cloudflare Pages in 2026: Which Free Host Fits Your Site?</h1><p class="meta">By Naresh · October 23, 2026 · <a href="/category/hosting-web.html">Hosting & Web</a></p>
+<p>I moved a real site between GitHub Pages and Cloudflare Pages this month, so this comparison comes from hands-on use, not a feature matrix. Both hosts are genuinely free — no card, no trial — and both serve your site over HTTPS on a custom domain. The differences show up in the limits, how deploying feels, and how URLs behave.</p>
+<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<h2>The free-tier limits side by side</h2>
+<table>
+<tr><th></th><th>GitHub Pages</th><th>Cloudflare Pages</th></tr>
+<tr><td><b>Bandwidth</b></td><td>100 GB/month (soft limit)</td><td>Unlimited static requests and bandwidth</td></tr>
+<tr><td><b>Site size</b></td><td>1 GB maximum</td><td>20,000 files per site, 25 MiB per file</td></tr>
+<tr><td><b>Builds</b></td><td>10 per hour (soft; custom Actions workflows are exempt)</td><td>500 per month, one at a time, 20-minute timeout</td></tr>
+<tr><td><b>Custom domain</b></td><td>Free, free HTTPS</td><td>Free, free HTTPS (100 per project)</td></tr>
+<tr><td><b>Deploying from a private repo</b></td><td>Needs a paid GitHub plan</td><td>Works on the free plan</td></tr>
+</table>
+<p>Checked against the official docs in October 2026. Free tiers change — check current pricing and limits before you commit to a host.</p>
+<h2>How deploying feels</h2>
+<p><b>GitHub Pages</b> is push-to-deploy: push to your branch and Actions publishes the site. Jekyll works out of the box, and any static generator runs through a workflow file. What you don't get natively: preview links for pull requests.</p>
+<p><b>Cloudflare Pages</b> connects to your repo and builds on every push, and every pull request gets a shareable <i>preview URL</i> you can send to someone before merging. It also deploys <i>without</i> Git: the CLI uploads a local folder straight to the CDN. That is how this blog publishes — a Python script generates plain HTML and one command pushes it live.</p>
+<h2>The URL quirk worth knowing</h2>
+<p>Cloudflare Pages serves clean URLs: <code>/about.html</code> permanently redirects to <code>/about</code>. GitHub Pages serves files exactly as written. It is cosmetic, but your canonical tags and sitemap should match the host you pick, or search engines crawl everything through a redirect. I hit this exact thing and had to regenerate the sitemap after moving.</p>
+<h2>So which one should you pick?</h2>
+<ul>
+<li><b>A blog or anything that might get traffic:</b> Cloudflare Pages. Unlimited bandwidth means a viral post never becomes a bill or a paused site.</li>
+<li><b>Docs, portfolio, or a project tied to its repository:</b> GitHub Pages. Pushing is deploying, and the site lives next to the code.</li>
+<li><b>You want a preview link for every pull request:</b> Cloudflare Pages.</li>
+<li><b>You generate the site locally</b> (Hugo, a Python script, plain HTML): Cloudflare's direct upload, no repository wiring needed.</li>
+<li><b>Site larger than 1 GB:</b> Cloudflare Pages — GitHub Pages hard-caps there.</li>
+</ul>
+<p>Running both is also fair game: keep one as the primary host and the other as a mirror, which is exactly what this site does. For more free options, read <a href="/posts/free-hosting-for-developers.html">Free Hosting for Developers</a>.</p>
+<div class="cta"><b>Want the full step-by-step build?</b>
+<p>My ebook <i>Camera to Browser</i> walks through a complete RTSP-to-WebRTC setup, with working code and troubleshooting.</p>
+<a class="btn" href="https://nareshbh.gumroad.com/l/pltyzu" target="_blank" rel="noopener">Get the ebook</a></div>
+<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Hosting & Web</h2><ul><li><a href="/posts/free-hosting-for-developers.html">Free Hosting for Developers: Where to Put Your Projects</a></li></ul></article></main>
+<footer><div class="wrap">
+<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a>
+<p>&copy; 2026 CodeCrumbs. All rights reserved.</p></div></footer>
+</body></html>
