@@ -1,0 +1,52 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to Make Your Website Faster: 9 Quick Wins That Actually Move Metrics | CodeCrumbs</title>
+<meta name="description" content="Measure first, then fix the big four: images, fonts, scripts and caching. A practical speed checklist for static sites and simple apps, ordered by impact.">
+<link rel="canonical" href="https://codecrumbs.pages.dev/posts/speed-up-website-quick-wins">
+<meta property="og:title" content="How to Make Your Website Faster: 9 Quick Wins That Actually Move Metrics | CodeCrumbs"><meta property="og:description" content="Measure first, then fix the big four: images, fonts, scripts and caching. A practical speed checklist for static sites and simple apps, ordered by impact."><meta property="og:type" content="website"><meta property="og:url" content="https://codecrumbs.pages.dev/posts/speed-up-website-quick-wins"><meta property="og:image" content="https://codecrumbs.pages.dev/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f766e">
+<link rel="alternate" type="application/rss+xml" title="CodeCrumbs RSS" href="/feed.xml">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CodeCrumbs","url":"https://codecrumbs.pages.dev","description":"Practical coding tutorials, tools & dev setups","author":{"@type":"Person","name":"Naresh"}}</script>
+<meta name="google-site-verification" content="9x7RghWpi0kminI4rFGYUH-Tx90gLiBHoBJuTrwSBMY">
+
+<!-- AdSense: set adsense_pub_id in config.json and rebuild -->
+</head><body>
+<div id="progress"></div><script>addEventListener("scroll",function(){var h=document.documentElement,w=document.getElementById("progress");w.style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%";});</script>
+<header><div class="wrap bar"><a class="logo" href="/">Code<span>Crumbs</span></a>
+<nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
+<main class="wrap"><article><h1>How to Make Your Website Faster: 9 Quick Wins That Actually Move Metrics</h1><p class="meta">By Naresh · October 24, 2026 · <a href="/category/tutorials.html">Tutorials</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">Step 0: measure before touching anything</a></li><li><a href="#sec-2">The wins, biggest first</a></li><li><a href="#sec-3">What "fast enough" looks like</a></li></ul></nav>
+<p>Site speed is one of the few optimizations that users, Google and your hosting bill all agree on. Google's Core Web Vitals — largest paint, interaction latency, layout shift — are ranking signals, and every one of them traces back to a small set of causes. This is the checklist, ordered by how much each fix usually buys you.</p>
+<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<h2 id="sec-1">Step 0: measure before touching anything</h2>
+<p>Run <b>PageSpeed Insights</b> (pagespeed.web.dev) on your live URL — it gives both lab and field data. Note your scores, change one thing, re-measure. Without this loop you are guessing. (Google's "good" thresholds: LCP under 2.5 s, INP under 200 ms, CLS under 0.1.)</p>
+<h2 id="sec-2">The wins, biggest first</h2>
+<h3>1. Fix your images</h3>
+<p>Usually 40-70% of a page's weight. Serve WebP or AVIF, size files to their display dimensions, and lazy-load everything below the fold: <code>&lt;img loading="lazy" width="1200" height="630"&gt;</code>. Preload only the image you need on first paint.</p>
+<h3>2. Cut third-party scripts</h3>
+<p>Tag managers, chat widgets and ad scripts block rendering longer than their size suggests. Every script you add later should load with <code>async</code> or <code>defer</code> — and ask whether it earns its place.</p>
+<h3>3. Ship fewer bytes of CSS and JavaScript</h3>
+<p>Delete unused rules (most sites ship more CSS than they render), minify in production, and defer non-critical JS. One stylesheet in the head beats three fighting for it.</p>
+<h3>4. Fonts</h3>
+<p>Self-host, subset to the characters you use, and always set <code>font-display: swap</code> so text appears instantly while the webfont loads. Limit yourself to two or three weights.</p>
+<h3>5. Caching</h3>
+<p>Static assets: <code>Cache-Control: public, max-age=31536000, immutable</code> for fingerprinted files; short or revalidating caches for HTML. On Cloudflare Pages this is configured with a small <code>_headers</code> file.</p>
+<h3>6. Use the CDN you already have</h3>
+<p>Cloudflare, Vercel and Netlify all serve from edge locations — make sure you are on one before buying anything.</p>
+<h3>7. Preconnect and preload hints</h3>
+<p><code>&lt;link rel="preconnect"&gt;</code> to origins you depend on removes a DNS+TLS handshake from the critical path.</p>
+<h3>8. Reduce layout shift</h3>
+<p>Reserve space for ads, images and embeds (<code>width</code>/<code>height</code> attributes, fixed ad-slot heights) so nothing jumps as it loads.</p>
+<h3>9. Kill render-blocking redirects</h3>
+<p>Every redirect hop adds a round trip. Serve canonical URLs directly — the clean-URL behaviour of hosts like Cloudflare Pages already handles this server-side.</p>
+<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<h2 id="sec-3">What "fast enough" looks like</h2>
+<p>For a content site: text on first paint, no layout jumps, images arriving progressively, nothing waiting on a script. Most static sites that follow this list land in the "good" range on PageSpeed without touching a server — speed is mostly discipline, not infrastructure.</p>
+<p>Want the full checklist applied to your site? Start with PageSpeed Insights, fix images first, then work down the list — and compare hosting behavior in <a href="/posts/netlify-vs-vercel-vs-cloudflare-pages.html">Netlify vs Vercel vs Cloudflare Pages</a>.</p>
+<div class="author"><div class="ava">N</div><div><b>Naresh</b><p>Software developer (B.Tech, CSE) writing practical guides on streaming, web dev and developer tools — based on things actually built. Questions? <a href="/contact.html">Get in touch</a>.</p></div></div><p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Tutorials</h2><ul><li><a href="/posts/rtsp-camera-to-browser-webrtc.html">How to Stream an RTSP Camera to Your Browser with WebRTC</a></li><li><a href="/posts/vs-code-extensions-that-save-time.html">10 VS Code Extensions That Save Time Every Day</a></li><li><a href="/posts/build-ai-security-camera-webrtc.html">Build Your Own AI Security Camera with WebRTC (Step by Step)</a></li></ul><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Make Your Website Faster: 9 Quick Wins That Actually Move Metrics","description":"Measure first, then fix the big four: images, fonts, scripts and caching. A practical speed checklist for static sites and simple apps, ordered by impact.","datePublished":"2026-10-24","author":{"@type":"Person","name":"Naresh"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://codecrumbs.pages.dev/posts/speed-up-website-quick-wins"},"publisher":{"@type":"Organization","name":"CodeCrumbs"}}</script></article></main>
+<footer><div class="wrap">
+<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a><a href="/feed.xml">RSS</a>
+<p>&copy; 2026 CodeCrumbs. All rights reserved.</p></div></footer>
+</body></html>
