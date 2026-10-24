@@ -3,31 +3,37 @@
 <title>Run AI Models on Your Own Computer with Ollama (Step by Step) | CodeCrumbs</title>
 <meta name="description" content="Ollama runs large language models locally for free: private, offline, and with no API bill. Install it, pull a model, and start chatting in minutes.">
 <link rel="canonical" href="https://codecrumbs.pages.dev/posts/run-llm-locally-ollama">
-<meta property="og:title" content="Run AI Models on Your Own Computer with Ollama (Step by Step) | CodeCrumbs"><meta property="og:description" content="Ollama runs large language models locally for free: private, offline, and with no API bill. Install it, pull a model, and start chatting in minutes."><meta property="og:type" content="website">
+<meta property="og:title" content="Run AI Models on Your Own Computer with Ollama (Step by Step) | CodeCrumbs"><meta property="og:description" content="Ollama runs large language models locally for free: private, offline, and with no API bill. Install it, pull a model, and start chatting in minutes."><meta property="og:type" content="website"><meta property="og:url" content="https://codecrumbs.pages.dev/posts/run-llm-locally-ollama"><meta property="og:image" content="https://codecrumbs.pages.dev/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f766e">
+<link rel="alternate" type="application/rss+xml" title="CodeCrumbs RSS" href="/feed.xml">
 <link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CodeCrumbs","url":"https://codecrumbs.pages.dev","description":"Practical coding tutorials, tools & dev setups","author":{"@type":"Person","name":"Naresh"}}</script>
 <meta name="google-site-verification" content="9x7RghWpi0kminI4rFGYUH-Tx90gLiBHoBJuTrwSBMY">
 
 <!-- AdSense: set adsense_pub_id in config.json and rebuild -->
 </head><body>
+<div id="progress"></div><script>addEventListener("scroll",function(){var h=document.documentElement,w=document.getElementById("progress");w.style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%";});</script>
 <header><div class="wrap bar"><a class="logo" href="/">Code<span>Crumbs</span></a>
 <nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
-<main class="wrap"><article><h1>Run AI Models on Your Own Computer with Ollama (Step by Step)</h1><p class="meta">By Naresh · October 23, 2026 · <a href="/category/tutorials.html">Tutorials</a></p>
+<main class="wrap"><article><h1>Run AI Models on Your Own Computer with Ollama (Step by Step)</h1><p class="meta">By Naresh · October 23, 2026 · <a href="/category/tutorials.html">Tutorials</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">What you need</a></li><li><a href="#sec-2">Step 1: Install</a></li><li><a href="#sec-3">Step 2: Pull a model and chat</a></li><li><a href="#sec-4">Which model should you pull?</a></li><li><a href="#sec-5">Step 3: Use it from other apps</a></li><li><a href="#sec-6">Good to know</a></li></ul></nav>
 <p>Everything AI-related pushes you toward a subscription. But a normal laptop can run a capable language model entirely on your own machine — no API key, no monthly fee, and nothing leaves your computer. The easiest way in is <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a>, a free open-source tool that downloads and runs models with one command.</p>
 <div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
-<h2>What you need</h2>
+<h2 id="sec-1">What you need</h2>
 <ul>
 <li>Mac, Windows or Linux</li>
 <li>RAM is the real limit: as a rule of thumb, a 7-8B parameter model wants roughly 8 GB of free memory, bigger models proportionally more</li>
 <li>No GPU required — a GPU (NVIDIA or Apple Silicon) just makes it noticeably faster</li>
 </ul>
-<h2>Step 1: Install</h2>
+<h2 id="sec-2">Step 1: Install</h2>
 <p>Download Ollama from <b>ollama.com/download</b> and run the installer. Then confirm in a terminal:</p>
 <pre><code>ollama --version</code></pre>
-<h2>Step 2: Pull a model and chat</h2>
+<h2 id="sec-3">Step 2: Pull a model and chat</h2>
 <pre><code>ollama pull llama3.1
 ollama run llama3.1</code></pre>
 <p>The first pull downloads a few GB; after that you are in a chat prompt. Type, get answers, type <code>/bye</code> to exit. See what you have installed with <code>ollama list</code>, remove one with <code>ollama rm llama3.1</code>.</p>
-<h2>Which model should you pull?</h2>
+<h2 id="sec-4">Which model should you pull?</h2>
 <ul>
 <li><b>General use:</b> Llama 3.1 (8B for lighter machines)</li>
 <li><b>Coding help:</b> Qwen2.5-Coder or Codellama</li>
@@ -35,17 +41,17 @@ ollama run llama3.1</code></pre>
 </ul>
 <p>Ollama keeps a model library at <b>ollama.com/library</b> — sizes and memory needs are listed there, and new models appear often, so check it for the current options.</p>
 <div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
-<h2>Step 3: Use it from other apps</h2>
+<h2 id="sec-5">Step 3: Use it from other apps</h2>
 <p>Ollama runs a local server on <code>localhost:11434</code> with an OpenAI-compatible API. That means the tools you already use can point at it: set the API base URL to <code>http://localhost:11434/v1</code> and any key, and your app talks to the local model instead of a paid one.</p>
 <p>For a ChatGPT-style web interface, <a href="https://github.com/open-webui/open-webui" target="_blank" rel="noopener">Open WebUI</a> is the popular choice — install it with Docker and it connects to Ollama automatically.</p>
-<h2>Good to know</h2>
+<h2 id="sec-6">Good to know</h2>
 <ul>
 <li><b>Private by default:</b> prompts never leave your machine after the model is downloaded.</li>
 <li><b>Works offline:</b> once pulled, no internet needed.</li>
 <li><b>Honest limits:</b> an 8B model on a laptop is handy for summaries, drafts and code explanation, but it is not frontier-level — for hard tasks you still want a big cloud model.</li>
 </ul>
-<p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Tutorials</h2><ul><li><a href="/posts/rtsp-camera-to-browser-webrtc.html">How to Stream an RTSP Camera to Your Browser with WebRTC</a></li><li><a href="/posts/vs-code-extensions-that-save-time.html">10 VS Code Extensions That Save Time Every Day</a></li><li><a href="/posts/build-ai-security-camera-webrtc.html">Build Your Own AI Security Camera with WebRTC (Step by Step)</a></li></ul></article></main>
+<div class="author"><div class="ava">N</div><div><b>Naresh</b><p>Software developer (B.Tech, CSE) writing practical guides on streaming, web dev and developer tools — based on things actually built. Questions? <a href="/contact.html">Get in touch</a>.</p></div></div><p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Tutorials</h2><ul><li><a href="/posts/rtsp-camera-to-browser-webrtc.html">How to Stream an RTSP Camera to Your Browser with WebRTC</a></li><li><a href="/posts/vs-code-extensions-that-save-time.html">10 VS Code Extensions That Save Time Every Day</a></li><li><a href="/posts/build-ai-security-camera-webrtc.html">Build Your Own AI Security Camera with WebRTC (Step by Step)</a></li></ul><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Run AI Models on Your Own Computer with Ollama (Step by Step)","description":"Ollama runs large language models locally for free: private, offline, and with no API bill. Install it, pull a model, and start chatting in minutes.","datePublished":"2026-10-23","author":{"@type":"Person","name":"Naresh"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://codecrumbs.pages.dev/posts/run-llm-locally-ollama"},"publisher":{"@type":"Organization","name":"CodeCrumbs"}}</script></article></main>
 <footer><div class="wrap">
-<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a>
+<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a><a href="/feed.xml">RSS</a>
 <p>&copy; 2026 CodeCrumbs. All rights reserved.</p></div></footer>
 </body></html>

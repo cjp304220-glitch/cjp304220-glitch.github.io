@@ -3,18 +3,24 @@
 <title>GitHub Pages vs Cloudflare Pages in 2026: Which Free Host Fits Your Site? | CodeCrumbs</title>
 <meta name="description" content="Both are free forever and serve static sites over HTTPS. A practical comparison of limits, deploy flow and URL behavior, plus which one to pick for a blog, docs or a portfolio.">
 <link rel="canonical" href="https://codecrumbs.pages.dev/posts/github-pages-vs-cloudflare-pages">
-<meta property="og:title" content="GitHub Pages vs Cloudflare Pages in 2026: Which Free Host Fits Your Site? | CodeCrumbs"><meta property="og:description" content="Both are free forever and serve static sites over HTTPS. A practical comparison of limits, deploy flow and URL behavior, plus which one to pick for a blog, docs or a portfolio."><meta property="og:type" content="website">
+<meta property="og:title" content="GitHub Pages vs Cloudflare Pages in 2026: Which Free Host Fits Your Site? | CodeCrumbs"><meta property="og:description" content="Both are free forever and serve static sites over HTTPS. A practical comparison of limits, deploy flow and URL behavior, plus which one to pick for a blog, docs or a portfolio."><meta property="og:type" content="website"><meta property="og:url" content="https://codecrumbs.pages.dev/posts/github-pages-vs-cloudflare-pages"><meta property="og:image" content="https://codecrumbs.pages.dev/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f766e">
+<link rel="alternate" type="application/rss+xml" title="CodeCrumbs RSS" href="/feed.xml">
 <link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CodeCrumbs","url":"https://codecrumbs.pages.dev","description":"Practical coding tutorials, tools & dev setups","author":{"@type":"Person","name":"Naresh"}}</script>
 <meta name="google-site-verification" content="9x7RghWpi0kminI4rFGYUH-Tx90gLiBHoBJuTrwSBMY">
 
 <!-- AdSense: set adsense_pub_id in config.json and rebuild -->
 </head><body>
+<div id="progress"></div><script>addEventListener("scroll",function(){var h=document.documentElement,w=document.getElementById("progress");w.style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%";});</script>
 <header><div class="wrap bar"><a class="logo" href="/">Code<span>Crumbs</span></a>
 <nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
-<main class="wrap"><article><h1>GitHub Pages vs Cloudflare Pages in 2026: Which Free Host Fits Your Site?</h1><p class="meta">By Naresh · October 23, 2026 · <a href="/category/hosting-web.html">Hosting & Web</a></p>
+<main class="wrap"><article><h1>GitHub Pages vs Cloudflare Pages in 2026: Which Free Host Fits Your Site?</h1><p class="meta">By Naresh · October 23, 2026 · <a href="/category/hosting-web.html">Hosting & Web</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">The free-tier limits side by side</a></li><li><a href="#sec-2">How deploying feels</a></li><li><a href="#sec-3">The URL quirk worth knowing</a></li><li><a href="#sec-4">So which one should you pick?</a></li></ul></nav>
 <p>I moved a real site between GitHub Pages and Cloudflare Pages this month, so this comparison comes from hands-on use, not a feature matrix. Both hosts are genuinely free — no card, no trial — and both serve your site over HTTPS on a custom domain. The differences show up in the limits, how deploying feels, and how URLs behave.</p>
 <div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
-<h2>The free-tier limits side by side</h2>
+<h2 id="sec-1">The free-tier limits side by side</h2>
 <table>
 <tr><th></th><th>GitHub Pages</th><th>Cloudflare Pages</th></tr>
 <tr><td><b>Bandwidth</b></td><td>100 GB/month (soft limit)</td><td>Unlimited static requests and bandwidth</td></tr>
@@ -24,12 +30,12 @@
 <tr><td><b>Deploying from a private repo</b></td><td>Needs a paid GitHub plan</td><td>Works on the free plan</td></tr>
 </table>
 <p>Checked against the official docs in October 2026. Free tiers change — check current pricing and limits before you commit to a host.</p>
-<h2>How deploying feels</h2>
+<h2 id="sec-2">How deploying feels</h2>
 <p><b>GitHub Pages</b> is push-to-deploy: push to your branch and Actions publishes the site. Jekyll works out of the box, and any static generator runs through a workflow file. What you don't get natively: preview links for pull requests.</p>
 <p><b>Cloudflare Pages</b> connects to your repo and builds on every push, and every pull request gets a shareable <i>preview URL</i> you can send to someone before merging. It also deploys <i>without</i> Git: the CLI uploads a local folder straight to the CDN. That is how this blog publishes — a Python script generates plain HTML and one command pushes it live.</p>
-<h2>The URL quirk worth knowing</h2>
+<h2 id="sec-3">The URL quirk worth knowing</h2>
 <p>Cloudflare Pages serves clean URLs: <code>/about.html</code> permanently redirects to <code>/about</code>. GitHub Pages serves files exactly as written. It is cosmetic, but your canonical tags and sitemap should match the host you pick, or search engines crawl everything through a redirect. I hit this exact thing and had to regenerate the sitemap after moving.</p>
-<h2>So which one should you pick?</h2>
+<h2 id="sec-4">So which one should you pick?</h2>
 <ul>
 <li><b>A blog or anything that might get traffic:</b> Cloudflare Pages. Unlimited bandwidth means a viral post never becomes a bill or a paused site.</li>
 <li><b>Docs, portfolio, or a project tied to its repository:</b> GitHub Pages. Pushing is deploying, and the site lives next to the code.</li>
@@ -42,8 +48,8 @@
 <p>My ebook <i>Camera to Browser</i> walks through a complete RTSP-to-WebRTC setup, with working code and troubleshooting.</p>
 <a class="btn" href="https://nareshbh.gumroad.com/l/pltyzu" target="_blank" rel="noopener">Get the ebook</a></div>
 <div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
-<p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Hosting & Web</h2><ul><li><a href="/posts/free-hosting-for-developers.html">Free Hosting for Developers: Where to Put Your Projects</a></li><li><a href="/posts/point-domain-to-cloudflare-pages.html">How to Point Your Domain to Cloudflare Pages (Step by Step)</a></li></ul></article></main>
+<div class="author"><div class="ava">N</div><div><b>Naresh</b><p>Software developer (B.Tech, CSE) writing practical guides on streaming, web dev and developer tools — based on things actually built. Questions? <a href="/contact.html">Get in touch</a>.</p></div></div><p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Hosting & Web</h2><ul><li><a href="/posts/free-hosting-for-developers.html">Free Hosting for Developers: Where to Put Your Projects</a></li><li><a href="/posts/point-domain-to-cloudflare-pages.html">How to Point Your Domain to Cloudflare Pages (Step by Step)</a></li></ul><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"GitHub Pages vs Cloudflare Pages in 2026: Which Free Host Fits Your Site?","description":"Both are free forever and serve static sites over HTTPS. A practical comparison of limits, deploy flow and URL behavior, plus which one to pick for a blog, docs or a portfolio.","datePublished":"2026-10-23","author":{"@type":"Person","name":"Naresh"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://codecrumbs.pages.dev/posts/github-pages-vs-cloudflare-pages"},"publisher":{"@type":"Organization","name":"CodeCrumbs"}}</script></article></main>
 <footer><div class="wrap">
-<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a>
+<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a><a href="/feed.xml">RSS</a>
 <p>&copy; 2026 CodeCrumbs. All rights reserved.</p></div></footer>
 </body></html>

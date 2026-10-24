@@ -3,46 +3,52 @@
 <title>How to Point Your Domain to Cloudflare Pages (Step by Step) | CodeCrumbs</title>
 <meta name="description" content="You bought a domain anywhere. Here is how to serve it from Cloudflare Pages with free HTTPS, and the one setting most people forget afterwards.">
 <link rel="canonical" href="https://codecrumbs.pages.dev/posts/point-domain-to-cloudflare-pages">
-<meta property="og:title" content="How to Point Your Domain to Cloudflare Pages (Step by Step) | CodeCrumbs"><meta property="og:description" content="You bought a domain anywhere. Here is how to serve it from Cloudflare Pages with free HTTPS, and the one setting most people forget afterwards."><meta property="og:type" content="website">
+<meta property="og:title" content="How to Point Your Domain to Cloudflare Pages (Step by Step) | CodeCrumbs"><meta property="og:description" content="You bought a domain anywhere. Here is how to serve it from Cloudflare Pages with free HTTPS, and the one setting most people forget afterwards."><meta property="og:type" content="website"><meta property="og:url" content="https://codecrumbs.pages.dev/posts/point-domain-to-cloudflare-pages"><meta property="og:image" content="https://codecrumbs.pages.dev/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f766e">
+<link rel="alternate" type="application/rss+xml" title="CodeCrumbs RSS" href="/feed.xml">
 <link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CodeCrumbs","url":"https://codecrumbs.pages.dev","description":"Practical coding tutorials, tools & dev setups","author":{"@type":"Person","name":"Naresh"}}</script>
 <meta name="google-site-verification" content="9x7RghWpi0kminI4rFGYUH-Tx90gLiBHoBJuTrwSBMY">
 
 <!-- AdSense: set adsense_pub_id in config.json and rebuild -->
 </head><body>
+<div id="progress"></div><script>addEventListener("scroll",function(){var h=document.documentElement,w=document.getElementById("progress");w.style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%";});</script>
 <header><div class="wrap bar"><a class="logo" href="/">Code<span>Crumbs</span></a>
 <nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
-<main class="wrap"><article><h1>How to Point Your Domain to Cloudflare Pages (Step by Step)</h1><p class="meta">By Naresh · October 23, 2026 · <a href="/category/hosting-web.html">Hosting & Web</a></p>
+<main class="wrap"><article><h1>How to Point Your Domain to Cloudflare Pages (Step by Step)</h1><p class="meta">By Naresh · October 23, 2026 · <a href="/category/hosting-web.html">Hosting & Web</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">Before you start</a></li><li><a href="#sec-2">Step 1: Add the domain to Cloudflare</a></li><li><a href="#sec-3">Step 2: Update nameservers at your registrar</a></li><li><a href="#sec-4">Step 3: Attach it to Pages</a></li><li><a href="#sec-5">Step 4: The setting people forget</a></li><li><a href="#sec-6">Troubleshooting</a></li></ul></nav>
 <p>A custom domain makes a site look finished, and Cloudflare Pages serves it with free HTTPS automatically. The whole setup is three moves: put the domain on Cloudflare, attach it to your Pages project, and update your canonical URLs. Expect it to take about 15 minutes plus some waiting for DNS.</p>
 <div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
-<h2>Before you start</h2>
+<h2 id="sec-1">Before you start</h2>
 <p>You need a domain bought from any registrar (Cloudflare Registrar sells at cost to members; prices everywhere change, so check current pricing at your registrar). Then:</p>
 <ol>
 <li>Sign up for a free Cloudflare account</li>
 <li>Have the project ready — here that is a Pages project like <code>codecrumbs</code></li>
 </ol>
-<h2>Step 1: Add the domain to Cloudflare</h2>
+<h2 id="sec-2">Step 1: Add the domain to Cloudflare</h2>
 <p>In the Cloudflare dashboard: <b>Add a domain</b> → enter your domain → choose the <b>Free</b> plan. Cloudflare gives you two nameservers, for example something like <code>alice.ns.cloudflare.com</code>.</p>
-<h2>Step 2: Update nameservers at your registrar</h2>
+<h2 id="sec-3">Step 2: Update nameservers at your registrar</h2>
 <p>Go to where you bought the domain, find the nameserver settings, and replace the defaults with the two Cloudflare ones. Save. Propagation usually takes minutes but can stretch to a day — you will see the domain turn "Active" in the Cloudflare dashboard when it is done.</p>
-<h2>Step 3: Attach it to Pages</h2>
+<h2 id="sec-4">Step 3: Attach it to Pages</h2>
 <p>Cloudflare dashboard → <b>Workers &amp; Pages</b> → your project → <b>Custom domains</b> → <b>Add a custom domain</b>. Because the domain already lives on the same Cloudflare account, no extra DNS records are needed — it verifies itself. (If the domain were on a different account, Cloudflare would ask you to add a CNAME or TXT record instead.)</p>
 <p>Within minutes the domain shows as active, and the certificate is issued automatically. Test it in a private browser window.</p>
 <div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
-<h2>Step 4: The setting people forget</h2>
+<h2 id="sec-5">Step 4: The setting people forget</h2>
 <p>Your pages now live at two addresses. Search engines need one canonical answer:</p>
 <ul>
 <li>Point your site's canonical URL and sitemap at the new domain (in this blog: change <code>url</code> in <code>config.json</code> and redeploy)</li>
 <li>Optionally add a redirect so <code>www</code> goes to the apex domain: Cloudflare → <b>Rules → Redirect Rules</b></li>
 </ul>
-<h2>Troubleshooting</h2>
+<h2 id="sec-6">Troubleshooting</h2>
 <ul>
 <li><b>"Pending verification":</b> the domain is not on this Cloudflare account yet — finish Step 1-2 first</li>
 <li><b>SSL pending:</b> certificates issue after DNS resolves; wait, then hard-refresh</li>
 <li><b>Old site still shows:</b> your browser or Cloudflare cache — try a private window</li>
 </ul>
 <p>For what you are hosting in the first place, see <a href="/posts/github-pages-vs-cloudflare-pages.html">GitHub Pages vs Cloudflare Pages</a>.</p>
-<p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Hosting & Web</h2><ul><li><a href="/posts/free-hosting-for-developers.html">Free Hosting for Developers: Where to Put Your Projects</a></li><li><a href="/posts/github-pages-vs-cloudflare-pages.html">GitHub Pages vs Cloudflare Pages in 2026: Which Free Host Fits Your Site?</a></li></ul></article></main>
+<div class="author"><div class="ava">N</div><div><b>Naresh</b><p>Software developer (B.Tech, CSE) writing practical guides on streaming, web dev and developer tools — based on things actually built. Questions? <a href="/contact.html">Get in touch</a>.</p></div></div><p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Hosting & Web</h2><ul><li><a href="/posts/free-hosting-for-developers.html">Free Hosting for Developers: Where to Put Your Projects</a></li><li><a href="/posts/github-pages-vs-cloudflare-pages.html">GitHub Pages vs Cloudflare Pages in 2026: Which Free Host Fits Your Site?</a></li></ul><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Point Your Domain to Cloudflare Pages (Step by Step)","description":"You bought a domain anywhere. Here is how to serve it from Cloudflare Pages with free HTTPS, and the one setting most people forget afterwards.","datePublished":"2026-10-23","author":{"@type":"Person","name":"Naresh"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://codecrumbs.pages.dev/posts/point-domain-to-cloudflare-pages"},"publisher":{"@type":"Organization","name":"CodeCrumbs"}}</script></article></main>
 <footer><div class="wrap">
-<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a>
+<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a><a href="/feed.xml">RSS</a>
 <p>&copy; 2026 CodeCrumbs. All rights reserved.</p></div></footer>
 </body></html>

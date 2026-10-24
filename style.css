@@ -52,3 +52,15 @@ article h1{font-size:1.6rem}
 .card{padding:16px}
 .btn{display:block;text-align:center}
 }
+header{position:sticky;top:0;z-index:40;background:var(--card);box-shadow:0 1px 0 var(--line)}
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--accent);z-index:60}
+.hero{background:linear-gradient(180deg,var(--soft),transparent);border-radius:16px;margin-top:16px;padding-left:20px;padding-right:20px}
+.card{transition:transform .15s ease,box-shadow .15s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.10)}
+.card h2 a:hover{color:var(--accent)}
+.toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:20px 0;font-size:.93rem}
+.toc b{display:block;margin-bottom:8px;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.toc ul{margin:0;padding-left:18px}.toc li{margin:4px 0}.toc a{text-decoration:none}
+.author{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:16px;margin:28px 0}
+.author .ava{width:46px;height:46px;flex:none;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.3rem}
+.author p{margin:4px 0 0;color:var(--muted);font-size:.92rem}

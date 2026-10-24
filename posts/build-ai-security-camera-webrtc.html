@@ -3,35 +3,41 @@
 <title>Build Your Own AI Security Camera with WebRTC (Step by Step) | CodeCrumbs</title>
 <meta name="description" content="Turn any IP camera into a smart camera: live WebRTC view in the browser plus AI person detection with Python, all running at home.">
 <link rel="canonical" href="https://codecrumbs.pages.dev/posts/build-ai-security-camera-webrtc">
-<meta property="og:title" content="Build Your Own AI Security Camera with WebRTC (Step by Step) | CodeCrumbs"><meta property="og:description" content="Turn any IP camera into a smart camera: live WebRTC view in the browser plus AI person detection with Python, all running at home."><meta property="og:type" content="website">
+<meta property="og:title" content="Build Your Own AI Security Camera with WebRTC (Step by Step) | CodeCrumbs"><meta property="og:description" content="Turn any IP camera into a smart camera: live WebRTC view in the browser plus AI person detection with Python, all running at home."><meta property="og:type" content="website"><meta property="og:url" content="https://codecrumbs.pages.dev/posts/build-ai-security-camera-webrtc"><meta property="og:image" content="https://codecrumbs.pages.dev/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f766e">
+<link rel="alternate" type="application/rss+xml" title="CodeCrumbs RSS" href="/feed.xml">
 <link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CodeCrumbs","url":"https://codecrumbs.pages.dev","description":"Practical coding tutorials, tools & dev setups","author":{"@type":"Person","name":"Naresh"}}</script>
 <meta name="google-site-verification" content="9x7RghWpi0kminI4rFGYUH-Tx90gLiBHoBJuTrwSBMY">
 
 <!-- AdSense: set adsense_pub_id in config.json and rebuild -->
 </head><body>
+<div id="progress"></div><script>addEventListener("scroll",function(){var h=document.documentElement,w=document.getElementById("progress");w.style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%";});</script>
 <header><div class="wrap bar"><a class="logo" href="/">Code<span>Crumbs</span></a>
 <nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
-<main class="wrap"><article><h1>Build Your Own AI Security Camera with WebRTC (Step by Step)</h1><p class="meta">By Naresh · October 13, 2026 · <a href="/category/tutorials.html">Tutorials</a></p>
+<main class="wrap"><article><h1>Build Your Own AI Security Camera with WebRTC (Step by Step)</h1><p class="meta">By Naresh · October 13, 2026 · <a href="/category/tutorials.html">Tutorials</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">What you need</a></li><li><a href="#sec-2">How it fits together</a></li><li><a href="#sec-3">Step 1: Live view in the browser</a></li><li><a href="#sec-4">Step 2: Add AI person detection</a></li><li><a href="#sec-5">Step 3: Make it practical</a></li></ul></nav>
 <p>Smart cameras with "AI person detection" usually come with a monthly cloud fee. You can build the same thing at home with an ordinary IP camera, a small computer and free software. You get a live view in your browser with sub-second latency, plus alerts when a person shows up.</p>
 <div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
-<h2>What you need</h2>
+<h2 id="sec-1">What you need</h2>
 <ul>
 <li>Any IP camera or CCTV DVR that gives an <b>RTSP</b> stream (most do)</li>
 <li>A computer to run it: an old laptop, a mini PC or a Raspberry Pi 5</li>
 <li>Python 3.10+</li>
 </ul>
-<h2>How it fits together</h2>
+<h2 id="sec-2">How it fits together</h2>
 <pre><code>Camera (RTSP) ──► MediaMTX ──► WebRTC ──► Browser (live view)
                      │
                      └──► Python + YOLO ──► "Person detected" alert</code></pre>
 <p>MediaMTX does the video plumbing. A separate Python script reads the same stream and runs object detection. Keeping them separate means the live view stays smooth even when detection is busy.</p>
-<h2>Step 1: Live view in the browser</h2>
+<h2 id="sec-3">Step 1: Live view in the browser</h2>
 <p>Download <a href="https://github.com/bluenviron/mediamtx" target="_blank" rel="noopener">MediaMTX</a>, then add your camera to <code>mediamtx.yml</code>:</p>
 <pre><code>paths:
   frontdoor:
     source: rtsp://user:pass@192.168.1.20:554/stream1</code></pre>
 <p>Run <code>./mediamtx</code> and open <code>http://localhost:8889/frontdoor</code>. You now have a live, low-latency stream. (New to this? Read <a href="/posts/rtsp-camera-to-browser-webrtc.html">how RTSP-to-WebRTC works</a> first.)</p>
-<h2>Step 2: Add AI person detection</h2>
+<h2 id="sec-4">Step 2: Add AI person detection</h2>
 <p>Install the libraries:</p>
 <pre><code>pip install ultralytics opencv-python requests</code></pre>
 <p>Create <code>detect.py</code>:</p>
@@ -55,7 +61,7 @@ while True:
         # requests.post(f"https://api.telegram.org/bot&lt;TOKEN&gt;/sendPhoto",
         #               data={"chat_id": "&lt;CHAT_ID&gt;"}, files={"photo": open("alert.jpg","rb")})</code></pre>
 <p>Notice the script reads from MediaMTX (<code>localhost:8554</code>), not the camera directly. Many cheap cameras only allow one or two connections, so MediaMTX shares a single connection with everything.</p>
-<h2>Step 3: Make it practical</h2>
+<h2 id="sec-5">Step 3: Make it practical</h2>
 <ul>
 <li><b>Save CPU:</b> process one frame every second instead of every frame.</li>
 <li><b>Fewer false alarms:</b> only alert when the person is inside a zone (a doorway, a gate).</li>
@@ -68,8 +74,8 @@ while True:
 <p>My ebook <i>Camera to Browser</i> walks through a complete RTSP-to-WebRTC setup, with working code and troubleshooting.</p>
 <a class="btn" href="https://nareshbh.gumroad.com/l/pltyzu" target="_blank" rel="noopener">Get the ebook</a></div>
 <div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
-<p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Tutorials</h2><ul><li><a href="/posts/rtsp-camera-to-browser-webrtc.html">How to Stream an RTSP Camera to Your Browser with WebRTC</a></li><li><a href="/posts/vs-code-extensions-that-save-time.html">10 VS Code Extensions That Save Time Every Day</a></li><li><a href="/posts/run-llm-locally-ollama.html">Run AI Models on Your Own Computer with Ollama (Step by Step)</a></li></ul></article></main>
+<div class="author"><div class="ava">N</div><div><b>Naresh</b><p>Software developer (B.Tech, CSE) writing practical guides on streaming, web dev and developer tools — based on things actually built. Questions? <a href="/contact.html">Get in touch</a>.</p></div></div><p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Tutorials</h2><ul><li><a href="/posts/rtsp-camera-to-browser-webrtc.html">How to Stream an RTSP Camera to Your Browser with WebRTC</a></li><li><a href="/posts/vs-code-extensions-that-save-time.html">10 VS Code Extensions That Save Time Every Day</a></li><li><a href="/posts/run-llm-locally-ollama.html">Run AI Models on Your Own Computer with Ollama (Step by Step)</a></li></ul><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Build Your Own AI Security Camera with WebRTC (Step by Step)","description":"Turn any IP camera into a smart camera: live WebRTC view in the browser plus AI person detection with Python, all running at home.","datePublished":"2026-10-13","author":{"@type":"Person","name":"Naresh"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://codecrumbs.pages.dev/posts/build-ai-security-camera-webrtc"},"publisher":{"@type":"Organization","name":"CodeCrumbs"}}</script></article></main>
 <footer><div class="wrap">
-<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a>
+<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a><a href="/feed.xml">RSS</a>
 <p>&copy; 2026 CodeCrumbs. All rights reserved.</p></div></footer>
 </body></html>

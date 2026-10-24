@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://codecrumbs.pages.dev/</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://codecrumbs.pages.dev/category/ai-tools</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://codecrumbs.pages.dev/category/tutorials</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://codecrumbs.pages.dev/category/gadgets</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://codecrumbs.pages.dev/category/hosting-web</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://codecrumbs.pages.dev/about</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://codecrumbs.pages.dev/contact</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://codecrumbs.pages.dev/privacy</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://codecrumbs.pages.dev/disclosure</loc><lastmod>2026-10-13</lastmod></url>
+  <url><loc>https://codecrumbs.pages.dev/</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://codecrumbs.pages.dev/category/ai-tools</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://codecrumbs.pages.dev/category/tutorials</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://codecrumbs.pages.dev/category/gadgets</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://codecrumbs.pages.dev/category/hosting-web</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://codecrumbs.pages.dev/about</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://codecrumbs.pages.dev/contact</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://codecrumbs.pages.dev/privacy</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://codecrumbs.pages.dev/disclosure</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://codecrumbs.pages.dev/posts/rtsp-camera-to-browser-webrtc</loc><lastmod>2026-10-13</lastmod></url>
   <url><loc>https://codecrumbs.pages.dev/posts/free-hosting-for-developers</loc><lastmod>2026-10-13</lastmod></url>
   <url><loc>https://codecrumbs.pages.dev/posts/vs-code-extensions-that-save-time</loc><lastmod>2026-10-13</lastmod></url>
@@ -18,9 +18,9 @@
   <url><loc>https://codecrumbs.pages.dev/posts/free-ai-coding-tools-for-students</loc><lastmod>2026-10-13</lastmod></url>
   <url><loc>https://codecrumbs.pages.dev/posts/open-source-ai-coding-agents</loc><lastmod>2026-10-13</lastmod></url>
   <url><loc>https://codecrumbs.pages.dev/posts/on-device-ai-phones-explained</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://codecrumbs.pages.dev/posts/github-pages-vs-cloudflare-pages</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://codecrumbs.pages.dev/posts/run-llm-locally-ollama</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://codecrumbs.pages.dev/posts/point-domain-to-cloudflare-pages</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://codecrumbs.pages.dev/posts/choose-keyboard-for-programming</loc><lastmod>2026-10-13</lastmod></url>
-  <url><loc>https://codecrumbs.pages.dev/posts/github-actions-beginners</loc><lastmod>2026-10-13</lastmod></url>
+  <url><loc>https://codecrumbs.pages.dev/posts/github-pages-vs-cloudflare-pages</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://codecrumbs.pages.dev/posts/run-llm-locally-ollama</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://codecrumbs.pages.dev/posts/point-domain-to-cloudflare-pages</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://codecrumbs.pages.dev/posts/choose-keyboard-for-programming</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://codecrumbs.pages.dev/posts/github-actions-beginners</loc><lastmod>2026-10-23</lastmod></url>
 </urlset>
