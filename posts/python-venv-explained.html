@@ -20,7 +20,7 @@
 <nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
 <main class="wrap"><article><h1>Python Virtual Environments Explained (venv in 10 Minutes)</h1><p class="meta">By Naresh · October 24, 2026 · <a href="/category/tutorials.html">Tutorials</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">The idea in one paragraph</a></li><li><a href="#sec-2">Step 1: create it</a></li><li><a href="#sec-3">Step 2: activate it</a></li><li><a href="#sec-4">Step 3: work inside it</a></li><li><a href="#sec-5">Step 4: leave it</a></li><li><a href="#sec-6">Habits that matter</a></li><li><a href="#sec-7">When to reach for more</a></li></ul></nav>
 <p>You install a package with <code>pip install requests</code> and two weeks later another project fails because it needed a different version of the same library. That problem — and the "it works on my machine" family of bugs — is exactly what virtual environments solve. They take about ten minutes to understand and five seconds to use forever after.</p>
-<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<div class="ad-slot">Advertisement</div>
 <h2 id="sec-1">The idea in one paragraph</h2>
 <p>A virtual environment is a private folder per project holding its own Python interpreter and packages. <code>pip install</code> inside the folder goes to the project; outside it, your system Python stays untouched. Two projects, two versions of the same library, zero conflict.</p>
 <h2 id="sec-2">Step 1: create it</h2>
@@ -42,7 +42,7 @@ pip freeze &gt; requirements.txt</code></pre>
 <h2 id="sec-5">Step 4: leave it</h2>
 <pre><code>deactivate</code></pre>
 <p>That is the whole lifecycle: create → activate → install → freeze → deactivate.</p>
-<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<div class="ad-slot">Advertisement</div>
 <h2 id="sec-6">Habits that matter</h2>
 <ul>
 <li><b>Add <code>.venv</code> to <code>.gitignore</code></b> — environments are local and never belong in a repository</li>

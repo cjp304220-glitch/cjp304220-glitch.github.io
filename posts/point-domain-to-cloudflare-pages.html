@@ -20,7 +20,7 @@
 <nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
 <main class="wrap"><article><h1>How to Point Your Domain to Cloudflare Pages (Step by Step)</h1><p class="meta">By Naresh · October 23, 2026 · <a href="/category/hosting-web.html">Hosting & Web</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">Before you start</a></li><li><a href="#sec-2">Step 1: Add the domain to Cloudflare</a></li><li><a href="#sec-3">Step 2: Update nameservers at your registrar</a></li><li><a href="#sec-4">Step 3: Attach it to Pages</a></li><li><a href="#sec-5">Step 4: The setting people forget</a></li><li><a href="#sec-6">Troubleshooting</a></li></ul></nav>
 <p>A custom domain makes a site look finished, and Cloudflare Pages serves it with free HTTPS automatically. The whole setup is three moves: put the domain on Cloudflare, attach it to your Pages project, and update your canonical URLs. Expect it to take about 15 minutes plus some waiting for DNS.</p>
-<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<div class="ad-slot">Advertisement</div>
 <h2 id="sec-1">Before you start</h2>
 <p>You need a domain bought from any registrar (Cloudflare Registrar sells at cost to members; prices everywhere change, so check current pricing at your registrar). Then:</p>
 <ol>
@@ -34,7 +34,7 @@
 <h2 id="sec-4">Step 3: Attach it to Pages</h2>
 <p>Cloudflare dashboard → <b>Workers &amp; Pages</b> → your project → <b>Custom domains</b> → <b>Add a custom domain</b>. Because the domain already lives on the same Cloudflare account, no extra DNS records are needed — it verifies itself. (If the domain were on a different account, Cloudflare would ask you to add a CNAME or TXT record instead.)</p>
 <p>Within minutes the domain shows as active, and the certificate is issued automatically. Test it in a private browser window.</p>
-<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<div class="ad-slot">Advertisement</div>
 <h2 id="sec-5">Step 4: The setting people forget</h2>
 <p>Your pages now live at two addresses. Search engines need one canonical answer:</p>
 <ul>

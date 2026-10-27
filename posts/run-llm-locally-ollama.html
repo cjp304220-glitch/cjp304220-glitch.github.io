@@ -20,7 +20,7 @@
 <nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
 <main class="wrap"><article><h1>Run AI Models on Your Own Computer with Ollama (Step by Step)</h1><p class="meta">By Naresh · October 23, 2026 · <a href="/category/tutorials.html">Tutorials</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">What you need</a></li><li><a href="#sec-2">Step 1: Install</a></li><li><a href="#sec-3">Step 2: Pull a model and chat</a></li><li><a href="#sec-4">Which model should you pull?</a></li><li><a href="#sec-5">Step 3: Use it from other apps</a></li><li><a href="#sec-6">Good to know</a></li></ul></nav>
 <p>Everything AI-related pushes you toward a subscription. But a normal laptop can run a capable language model entirely on your own machine — no API key, no monthly fee, and nothing leaves your computer. The easiest way in is <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a>, a free open-source tool that downloads and runs models with one command.</p>
-<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<div class="ad-slot">Advertisement</div>
 <h2 id="sec-1">What you need</h2>
 <ul>
 <li>Mac, Windows or Linux</li>
@@ -41,7 +41,7 @@ ollama run llama3.1</code></pre>
 <li><b>Small and fast:</b> Gemma 2 or Mistral variants</li>
 </ul>
 <p>Ollama keeps a model library at <b>ollama.com/library</b> — sizes and memory needs are listed there, and new models appear often, so check it for the current options.</p>
-<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<div class="ad-slot">Advertisement</div>
 <h2 id="sec-5">Step 3: Use it from other apps</h2>
 <p>Ollama runs a local server on <code>localhost:11434</code> with an OpenAI-compatible API. That means the tools you already use can point at it: set the API base URL to <code>http://localhost:11434/v1</code> and any key, and your app talks to the local model instead of a paid one.</p>
 <p>For a ChatGPT-style web interface, <a href="https://github.com/open-webui/open-webui" target="_blank" rel="noopener">Open WebUI</a> is the popular choice — install it with Docker and it connects to Ollama automatically.</p>

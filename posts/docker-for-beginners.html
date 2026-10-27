@@ -20,7 +20,7 @@
 <nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
 <main class="wrap"><article><h1>Docker for Beginners: Containers Explained Simply</h1><p class="meta">By Naresh · October 27, 2026 · <a href="/category/tutorials.html">Tutorials</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">Container vs virtual machine</a></li><li><a href="#sec-2">Install and run your first container</a></li><li><a href="#sec-3">The five commands you will type daily</a></li><li><a href="#sec-4">Building your own image</a></li><li><a href="#sec-5">One command for a whole stack</a></li><li><a href="#sec-6">When not to use Docker</a></li></ul></nav>
 <p>Docker's promise is simple: the app runs the same on your laptop, on the server and on your teammate's machine. No more "works on my machine". The mechanism behind that promise is a container — a lightweight, isolated process with everything it needs bundled around it.</p>
-<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<div class="ad-slot">Advertisement</div>
 <h2 id="sec-1">Container vs virtual machine</h2>
 <p>A virtual machine emulates a whole computer — gigabytes, slow to start. A container shares your host OS kernel and packages only the app plus its libraries. That makes containers small (megabytes) and fast (seconds). Ten containers idle on a laptop that would struggle with three VMs.</p>
 <h2 id="sec-2">Install and run your first container</h2>
@@ -47,7 +47,7 @@ CMD ["python", "app.py"]</code></pre>
 <pre><code>docker build -t myapp .
 docker run --rm -p 9000:9000 myapp</code></pre>
 <p>Read the file top to bottom: start from an official Python image, set a folder, copy the requirements, install them, copy the code, define the start command. Layer order matters — changing app code should not rebuild your dependencies, so copy requirements first.</p>
-<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<div class="ad-slot">Advertisement</div>
 <h2 id="sec-5">One command for a whole stack</h2>
 <p>When your app needs a database and a cache too, use <code>docker compose</code> with a <code>docker-compose.yml</code>:</p>
 <pre><code>services:

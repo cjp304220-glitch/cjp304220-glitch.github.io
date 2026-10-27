@@ -20,7 +20,7 @@
 <nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
 <main class="wrap"><article><h1>git revert vs reset vs restore: Which One When</h1><p class="meta">By Naresh · October 27, 2026 · <a href="/category/tutorials.html">Tutorials</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">git revert: the safe one</a></li><li><a href="#sec-2">git reset: moving the branch backwards</a></li><li><a href="#sec-3">git restore: fixing files, not history</a></li><li><a href="#sec-4">git checkout (or switch): changing branches</a></li><li><a href="#sec-5">Which one do I need?</a></li></ul></nav>
 <p>Every Git panic follows the same pattern: you committed too early, or committed the wrong thing, and now you are staring at the terminal trying to remember whether <code>reset</code> or <code>revert</code> is the safe one. Here is the whole picture, split into the safe commands and the destructive ones.</p>
-<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<div class="ad-slot">Advertisement</div>
 <h2 id="sec-1">git revert: the safe one</h2>
 <p><code>revert</code> does not remove history — it creates a <b>new commit</b> that undoes an old one. The bad commit stays in the log, followed by its inverse. Because nothing is erased, it is the only undo that is safe on shared branches.</p>
 <pre><code>git revert HEAD
@@ -42,7 +42,7 @@ git restore --staged file.py    # unstage without losing the edits</code></pre>
 <pre><code>git switch feature-x       # switch to an existing branch
 git switch -c new-branch    # create and switch
 git checkout -- file.py     # old-style restore, still works</code></pre>
-<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<div class="ad-slot">Advertisement</div>
 <h2 id="sec-5">Which one do I need?</h2>
 <ul>
 <li><b>Undo a commit I have not pushed</b> — <code>git reset --mixed HEAD~1</code> to keep changes, <code>--hard</code> to throw them away</li>

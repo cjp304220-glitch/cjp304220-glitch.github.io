@@ -20,7 +20,7 @@
 <nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
 <main class="wrap"><article><h1>curl Commands Every Developer Should Know (Cheatsheet)</h1><p class="meta">By Naresh · October 27, 2026 · <a href="/category/tutorials.html">Tutorials</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">Check a URL and its headers</a></li><li><a href="#sec-2">POST data and JSON</a></li><li><a href="#sec-3">Follow redirects, send auth</a></li><li><a href="#sec-4">Download like a pro</a></li><li><a href="#sec-5">Uploads, compression, timing</a></li><li><a href="#sec-6">Quick reference</a></li></ul></nav>
 <p>curl ships with every Linux and macOS machine, needs no install, and can do almost anything an HTTP client can: poke an API, download a file, test auth, measure response time. These are the forms you will actually type.</p>
-<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<div class="ad-slot">Advertisement</div>
 <h2 id="sec-1">Check a URL and its headers</h2>
 <pre><code>curl -I https://example.com
 curl -s -o /dev/null -w "%{http_code}\n" https://example.com
@@ -44,7 +44,7 @@ curl -o local.zip https://example.com/file   # choose the filename
 curl -C - -O https://example.com/big.iso     # resume an interrupted download
 curl -sSL -o lib.zip https://example.com/lib --retry 3</code></pre>
 <p><code>-C -</code> continues where a stopped download left off, and <code>--retry</code> rides out flaky networks. Both belong in any script that fetches big files.</p>
-<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<div class="ad-slot">Advertisement</div>
 <h2 id="sec-5">Uploads, compression, timing</h2>
 <pre><code>curl -F "file=@photo.png" https://example.com/upload
 curl --compressed https://example.com/page          # accept gzip/br

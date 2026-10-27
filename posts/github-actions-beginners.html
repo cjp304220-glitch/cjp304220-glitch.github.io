@@ -20,7 +20,7 @@
 <nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
 <main class="wrap"><article><h1>GitHub Actions for Beginners: Automate the Boring Stuff</h1><p class="meta">By Naresh · October 23, 2026 · <a href="/category/tutorials.html">Tutorials</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">Your first workflow</a></li><li><a href="#sec-2">Reading the file</a></li><li><a href="#sec-3">Secrets</a></li><li><a href="#sec-4">Three useful patterns</a></li><li><a href="#sec-5">Gotchas</a></li></ul></nav>
 <p>GitHub Actions is a free automation runner built into GitHub. Every time you push code, a machine in the cloud can test it, build it, or deploy it — while you do nothing. Setup is one YAML file.</p>
-<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<div class="ad-slot">Advertisement</div>
 <h2 id="sec-1">Your first workflow</h2>
 <p>Create the file <code>.github/workflows/ci.yml</code>:</p>
 <pre><code>name: CI
@@ -48,7 +48,7 @@ jobs:
 </ul>
 <h2 id="sec-3">Secrets</h2>
 <p>Never paste API keys into the YAML. Repo → <b>Settings → Secrets and variables → Actions</b> → add them, then reference as <code>secrets.MY_KEY</code> inside your workflow.</p>
-<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<div class="ad-slot">Advertisement</div>
 <h2 id="sec-4">Three useful patterns</h2>
 <pre><code>schedule:
   - cron: "0 9 * * 1"   # every Monday, 09:00 UTC</code></pre>

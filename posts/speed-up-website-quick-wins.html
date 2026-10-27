@@ -20,7 +20,7 @@
 <nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
 <main class="wrap"><article><h1>How to Make Your Website Faster: 9 Quick Wins That Actually Move Metrics</h1><p class="meta">By Naresh · October 24, 2026 · <a href="/category/tutorials.html">Tutorials</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">Step 0: measure before touching anything</a></li><li><a href="#sec-2">The wins, biggest first</a></li><li><a href="#sec-3">What "fast enough" looks like</a></li></ul></nav>
 <p>Site speed is one of the few optimizations that users, Google and your hosting bill all agree on. Google's Core Web Vitals — largest paint, interaction latency, layout shift — are ranking signals, and every one of them traces back to a small set of causes. This is the checklist, ordered by how much each fix usually buys you.</p>
-<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<div class="ad-slot">Advertisement</div>
 <h2 id="sec-1">Step 0: measure before touching anything</h2>
 <p>Run <b>PageSpeed Insights</b> (pagespeed.web.dev) on your live URL — it gives both lab and field data. Note your scores, change one thing, re-measure. Without this loop you are guessing. (Google's "good" thresholds: LCP under 2.5 s, INP under 200 ms, CLS under 0.1.)</p>
 <h2 id="sec-2">The wins, biggest first</h2>
@@ -42,7 +42,7 @@
 <p>Reserve space for ads, images and embeds (<code>width</code>/<code>height</code> attributes, fixed ad-slot heights) so nothing jumps as it loads.</p>
 <h3>9. Kill render-blocking redirects</h3>
 <p>Every redirect hop adds a round trip. Serve canonical URLs directly — the clean-URL behaviour of hosts like Cloudflare Pages already handles this server-side.</p>
-<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<div class="ad-slot">Advertisement</div>
 <h2 id="sec-3">What "fast enough" looks like</h2>
 <p>For a content site: text on first paint, no layout jumps, images arriving progressively, nothing waiting on a script. Most static sites that follow this list land in the "good" range on PageSpeed without touching a server — speed is mostly discipline, not infrastructure.</p>
 <p>Want the full checklist applied to your site? Start with PageSpeed Insights, fix images first, then work down the list — and compare hosting behavior in <a href="/posts/netlify-vs-vercel-vs-cloudflare-pages.html">Netlify vs Vercel vs Cloudflare Pages</a>.</p>
