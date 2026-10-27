@@ -1,0 +1,69 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Docker for Beginners: Containers Explained Simply | CodeCrumbs</title>
+<meta name="description" content="What a container actually is, and the ten Docker commands you need to run, build and ship your first app.">
+<link rel="canonical" href="https://codecrumbs.pages.dev/posts/docker-for-beginners">
+<meta property="og:title" content="Docker for Beginners: Containers Explained Simply | CodeCrumbs"><meta property="og:description" content="What a container actually is, and the ten Docker commands you need to run, build and ship your first app."><meta property="og:type" content="website"><meta property="og:url" content="https://codecrumbs.pages.dev/posts/docker-for-beginners"><meta property="og:image" content="https://codecrumbs.pages.dev/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f766e">
+<link rel="alternate" type="application/rss+xml" title="CodeCrumbs RSS" href="/feed.xml">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CodeCrumbs","url":"https://codecrumbs.pages.dev","description":"Practical coding tutorials, tools & dev setups","author":{"@type":"Person","name":"Naresh"}}</script>
+<meta name="google-site-verification" content="9x7RghWpi0kminI4rFGYUH-Tx90gLiBHoBJuTrwSBMY">
+
+<!-- AdSense: set adsense_pub_id in config.json and rebuild -->
+
+</head><body>
+<div id="progress"></div><script>addEventListener("scroll",function(){var h=document.documentElement,w=document.getElementById("progress");w.style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%";});</script>
+<header><div class="wrap bar"><a class="logo" href="/">Code<span>Crumbs</span></a>
+<nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
+<main class="wrap"><article><h1>Docker for Beginners: Containers Explained Simply</h1><p class="meta">By Naresh · October 27, 2026 · <a href="/category/tutorials.html">Tutorials</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">Container vs virtual machine</a></li><li><a href="#sec-2">Install and run your first container</a></li><li><a href="#sec-3">The five commands you will type daily</a></li><li><a href="#sec-4">Building your own image</a></li><li><a href="#sec-5">One command for a whole stack</a></li><li><a href="#sec-6">When not to use Docker</a></li></ul></nav>
+<p>Docker's promise is simple: the app runs the same on your laptop, on the server and on your teammate's machine. No more "works on my machine". The mechanism behind that promise is a container — a lightweight, isolated process with everything it needs bundled around it.</p>
+<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<h2 id="sec-1">Container vs virtual machine</h2>
+<p>A virtual machine emulates a whole computer — gigabytes, slow to start. A container shares your host OS kernel and packages only the app plus its libraries. That makes containers small (megabytes) and fast (seconds). Ten containers idle on a laptop that would struggle with three VMs.</p>
+<h2 id="sec-2">Install and run your first container</h2>
+<p>Install Docker Desktop (Windows/Mac) or <code>docker-ce</code> (Linux), then:</p>
+<pre><code>docker run --rm -it hello-world
+docker run --rm -p 8080:80 nginx</code></pre>
+<p>Second command: pull the official nginx web server, start it, and map port 80 inside the container to 8080 on your machine. Open <code>localhost:8080</code> — you are running a web server without installing a single nginx file on your system.</p>
+<h2 id="sec-3">The five commands you will type daily</h2>
+<pre><code>docker ps                 # running containers
+docker logs -f &lt;name&gt;     # follow a container's output
+docker stop &lt;name&gt;        # stop it
+docker images             # what do I have locally?
+docker exec -it &lt;name&gt; sh # shell inside the container</code></pre>
+<p>That last one is the superpower: a shell straight into a known-good environment, no matter what state your host is in.</p>
+<h2 id="sec-4">Building your own image</h2>
+<p>An <b>image</b> is the snapshot a container starts from. You build one with a <code>Dockerfile</code>:</p>
+<pre><code>FROM python:3.12-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+CMD ["python", "app.py"]</code></pre>
+<p>Then build and run it:</p>
+<pre><code>docker build -t myapp .
+docker run --rm -p 9000:9000 myapp</code></pre>
+<p>Read the file top to bottom: start from an official Python image, set a folder, copy the requirements, install them, copy the code, define the start command. Layer order matters — changing app code should not rebuild your dependencies, so copy requirements first.</p>
+<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<h2 id="sec-5">One command for a whole stack</h2>
+<p>When your app needs a database and a cache too, use <code>docker compose</code> with a <code>docker-compose.yml</code>:</p>
+<pre><code>services:
+  web:
+    build: .
+    ports:
+      - "9000:9000"
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: dev</code></pre>
+<p><code>docker compose up</code> starts both, networked and ready; <code>docker compose down</code> tears everything down. This file doubles as documentation anyone can run with one command.</p>
+<h2 id="sec-6">When not to use Docker</h2>
+<p>One-off scripts, GUI apps, and tiny static sites usually do not need it. Containers shine when you have services to coordinate, dependencies to pin, or environments to reproduce. If your next step is automating builds of those images, they slot directly into <a href="/posts/github-actions-beginners.html">GitHub Actions</a>.</p>
+<div class="author"><div class="ava">N</div><div><b>Naresh</b><p>Software developer (B.Tech, CSE) writing practical guides on streaming, web dev and developer tools — based on things actually built. Questions? <a href="/contact.html">Get in touch</a>.</p></div></div><p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Tutorials</h2><ul><li><a href="/posts/rtsp-camera-to-browser-webrtc.html">How to Stream an RTSP Camera to Your Browser with WebRTC</a></li><li><a href="/posts/vs-code-extensions-that-save-time.html">10 VS Code Extensions That Save Time Every Day</a></li><li><a href="/posts/build-ai-security-camera-webrtc.html">Build Your Own AI Security Camera with WebRTC (Step by Step)</a></li></ul><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Docker for Beginners: Containers Explained Simply","description":"What a container actually is, and the ten Docker commands you need to run, build and ship your first app.","datePublished":"2026-10-27","author":{"@type":"Person","name":"Naresh"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://codecrumbs.pages.dev/posts/docker-for-beginners"},"publisher":{"@type":"Organization","name":"CodeCrumbs"}}</script></article></main>
+<footer><div class="wrap">
+<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a><a href="/feed.xml">RSS</a>
+<p>&copy; 2026 CodeCrumbs. All rights reserved.</p></div></footer>
+</body></html>

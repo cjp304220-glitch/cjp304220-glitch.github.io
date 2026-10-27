@@ -1,0 +1,83 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>30 Linux Commands You&#x27;ll Actually Use (Cheatsheet) | CodeCrumbs</title>
+<meta name="description" content="Files, searching, permissions, processes, networking — the terminal commands developers type every day, with plain-English explanations.">
+<link rel="canonical" href="https://codecrumbs.pages.dev/posts/linux-commands-cheatsheet">
+<meta property="og:title" content="30 Linux Commands You&#x27;ll Actually Use (Cheatsheet) | CodeCrumbs"><meta property="og:description" content="Files, searching, permissions, processes, networking — the terminal commands developers type every day, with plain-English explanations."><meta property="og:type" content="website"><meta property="og:url" content="https://codecrumbs.pages.dev/posts/linux-commands-cheatsheet"><meta property="og:image" content="https://codecrumbs.pages.dev/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f766e">
+<link rel="alternate" type="application/rss+xml" title="CodeCrumbs RSS" href="/feed.xml">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CodeCrumbs","url":"https://codecrumbs.pages.dev","description":"Practical coding tutorials, tools & dev setups","author":{"@type":"Person","name":"Naresh"}}</script>
+<meta name="google-site-verification" content="9x7RghWpi0kminI4rFGYUH-Tx90gLiBHoBJuTrwSBMY">
+
+<!-- AdSense: set adsense_pub_id in config.json and rebuild -->
+
+</head><body>
+<div id="progress"></div><script>addEventListener("scroll",function(){var h=document.documentElement,w=document.getElementById("progress");w.style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%";});</script>
+<header><div class="wrap bar"><a class="logo" href="/">Code<span>Crumbs</span></a>
+<nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
+<main class="wrap"><article><h1>30 Linux Commands You'll Actually Use (Cheatsheet)</h1><p class="meta">By Naresh · October 27, 2026 · <a href="/category/tutorials.html">Tutorials</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">Getting around and looking at files</a></li><li><a href="#sec-2">Finding things</a></li><li><a href="#sec-3">Pipes and redirection</a></li><li><a href="#sec-4">Permissions and ownership</a></li><li><a href="#sec-5">Processes and system</a></li><li><a href="#sec-6">Networking and transfers</a></li><li><a href="#sec-7">Shortcuts worth learning</a></li></ul></nav>
+<p>Every developer ends up in a terminal eventually — a server, a Docker container, a CI runner. These are the commands worth memorising, grouped by job.</p>
+<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<h2 id="sec-1">Getting around and looking at files</h2>
+<pre><code>ls -lah               # all files, human sizes, with details
+cd /var/log && pwd     # change directory, show where you are
+cat file.txt           # print a file
+less file.txt          # scroll through a big file (q to quit)
+tail -f app.log        # follow a log as it grows
+cp -r src dst          # copy recursively
+mv old new             # move or rename
+rm -rf dir             # delete — check twice before Enter</code></pre>
+<h2 id="sec-2">Finding things</h2>
+<pre><code>grep -rn "TODO" src/       # search inside files, show line numbers
+grep -i "error" app.log    # case-insensitive
+find . -name "*.py"        # find files by name
+find . -size -10M          # files smaller than 10 MB
+history | grep docker      # search your own command history</code></pre>
+<p><code>grep</code> reads stdin, so you can pipe anything into it — that is where the real power is.</p>
+<h2 id="sec-3">Pipes and redirection</h2>
+<pre><code>command | grep x | head -20   # chain filters
+ls -la > out.txt              # overwrite a file with output
+ps aux >> out.txt             # append instead
+sort data.txt | uniq -d       # duplicate lines, sorted
+cat access.log | awk '{print $1}' | sort | uniq -c | sort -rn | head</code></pre>
+<p>The last line is the classic "top visitors" one-liner: first column, counted, sorted by frequency. Learn to read pipes left to right and most "magic" shell tricks stop being magic.</p>
+<h2 id="sec-4">Permissions and ownership</h2>
+<pre><code>chmod +x script.sh      # make executable
+chmod 600 id_rsa        # owner read/write only
+chmod -R 755 public/    # folder and everything inside it
+chown user:group file   # change owner (needs sudo)</code></pre>
+<p>Numbers are rwx bits: 7 = read+write+execute, 5 = read+execute, 0 = nothing. <code>600</code> on private keys is the one to remember.</p>
+<h2 id="sec-5">Processes and system</h2>
+<pre><code>ps aux | grep python    # what is running
+top                     # live resource view (q to quit)
+kill -9 1234            # force a stuck process to die
+df -h                   # disk space per mount
+du -sh *                # folder sizes, human readable
+free -h                 # RAM
+uptime                  # load and time since boot</code></pre>
+<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<h2 id="sec-6">Networking and transfers</h2>
+<pre><code>ip addr                 # my IP addresses
+ping example.com        # is it reachable
+ss -tlnp                # which ports are listening
+ssh user@host           # remote shell
+scp file.txt user@host:/tmp/   # copy a file over SSH
+tar -czf backup.tar.gz dir/    # compress a folder
+tar -xzf backup.tar.gz         # extract it</code></pre>
+<p>For anything HTTP-shaped, there is a dedicated toolkit — the commands in the <a href="/posts/curl-commands-cheatsheet.html">curl cheatsheet</a> pair perfectly with these.</p>
+<h2 id="sec-7">Shortcuts worth learning</h2>
+<ul>
+<li><b>Tab</b> — auto-complete paths and commands</li>
+<li><b>Ctrl+R</b> — fuzzy-search command history</li>
+<li><b>Ctrl+C</b> / <b>Ctrl+D</b> — stop a command / exit a shell</li>
+<li><b>!!</b> — rerun the last command (useful with <code>sudo !!</code>)</li>
+</ul>
+<p>You do not need all thirty on day one. Get comfortable with navigation, <code>grep</code>, pipes and <code>ps</code> — the rest you will pick up within a month of daily terminal use.</p>
+<div class="author"><div class="ava">N</div><div><b>Naresh</b><p>Software developer (B.Tech, CSE) writing practical guides on streaming, web dev and developer tools — based on things actually built. Questions? <a href="/contact.html">Get in touch</a>.</p></div></div><p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Tutorials</h2><ul><li><a href="/posts/rtsp-camera-to-browser-webrtc.html">How to Stream an RTSP Camera to Your Browser with WebRTC</a></li><li><a href="/posts/vs-code-extensions-that-save-time.html">10 VS Code Extensions That Save Time Every Day</a></li><li><a href="/posts/build-ai-security-camera-webrtc.html">Build Your Own AI Security Camera with WebRTC (Step by Step)</a></li></ul><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"30 Linux Commands You'll Actually Use (Cheatsheet)","description":"Files, searching, permissions, processes, networking \u2014 the terminal commands developers type every day, with plain-English explanations.","datePublished":"2026-10-27","author":{"@type":"Person","name":"Naresh"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://codecrumbs.pages.dev/posts/linux-commands-cheatsheet"},"publisher":{"@type":"Organization","name":"CodeCrumbs"}}</script></article></main>
+<footer><div class="wrap">
+<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a><a href="/feed.xml">RSS</a>
+<p>&copy; 2026 CodeCrumbs. All rights reserved.</p></div></footer>
+</body></html>
