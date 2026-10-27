@@ -1,0 +1,59 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>git revert vs reset vs restore: Which One When | CodeCrumbs</title>
+<meta name="description" content="The four Git commands people mix up — reset, revert, restore and checkout — with the exact cases each one belongs to.">
+<link rel="canonical" href="https://codecrumbs.pages.dev/posts/git-revert-vs-reset-explained">
+<meta property="og:title" content="git revert vs reset vs restore: Which One When | CodeCrumbs"><meta property="og:description" content="The four Git commands people mix up — reset, revert, restore and checkout — with the exact cases each one belongs to."><meta property="og:type" content="website"><meta property="og:url" content="https://codecrumbs.pages.dev/posts/git-revert-vs-reset-explained"><meta property="og:image" content="https://codecrumbs.pages.dev/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f766e">
+<link rel="alternate" type="application/rss+xml" title="CodeCrumbs RSS" href="/feed.xml">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CodeCrumbs","url":"https://codecrumbs.pages.dev","description":"Practical coding tutorials, tools & dev setups","author":{"@type":"Person","name":"Naresh"}}</script>
+<meta name="google-site-verification" content="9x7RghWpi0kminI4rFGYUH-Tx90gLiBHoBJuTrwSBMY">
+
+<!-- AdSense: set adsense_pub_id in config.json and rebuild -->
+
+</head><body>
+<div id="progress"></div><script>addEventListener("scroll",function(){var h=document.documentElement,w=document.getElementById("progress");w.style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%";});</script>
+<header><div class="wrap bar"><a class="logo" href="/">Code<span>Crumbs</span></a>
+<nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
+<main class="wrap"><article><h1>git revert vs reset vs restore: Which One When</h1><p class="meta">By Naresh · October 27, 2026 · <a href="/category/tutorials.html">Tutorials</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">git revert: the safe one</a></li><li><a href="#sec-2">git reset: moving the branch backwards</a></li><li><a href="#sec-3">git restore: fixing files, not history</a></li><li><a href="#sec-4">git checkout (or switch): changing branches</a></li><li><a href="#sec-5">Which one do I need?</a></li></ul></nav>
+<p>Every Git panic follows the same pattern: you committed too early, or committed the wrong thing, and now you are staring at the terminal trying to remember whether <code>reset</code> or <code>revert</code> is the safe one. Here is the whole picture, split into the safe commands and the destructive ones.</p>
+<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<h2 id="sec-1">git revert: the safe one</h2>
+<p><code>revert</code> does not remove history — it creates a <b>new commit</b> that undoes an old one. The bad commit stays in the log, followed by its inverse. Because nothing is erased, it is the only undo that is safe on shared branches.</p>
+<pre><code>git revert HEAD
+git revert a1b2c3d</code></pre>
+<p>Use it on <code>main</code>, on any branch other people have pulled, or whenever someone might already be built on top of the commit you want to undo.</p>
+<h2 id="sec-2">git reset: moving the branch backwards</h2>
+<p><code>reset</code> moves the branch pointer itself. Three modes, three effects:</p>
+<pre><code>git reset --soft HEAD~1   # commit undone, changes stay staged
+git reset --mixed HEAD~1  # commit undone, changes stay in working tree (default)
+git reset --hard HEAD~1   # commit, staging area and files all wiped</code></pre>
+<p><b>--hard is the dangerous one.</b> It rewrites your working tree and uncommitted changes do not come back. Use reset on local-only branches — before you push, never after (pushing a rewritten branch needs --force and can destroy a teammate's day).</p>
+<h2 id="sec-3">git restore: fixing files, not history</h2>
+<p><code>restore</code> (Git 2.23 and newer) replaces the file-recovery half of <code>checkout</code>:</p>
+<pre><code>git restore file.py             # discard local edits to a file
+git restore --staged file.py    # unstage without losing the edits</code></pre>
+<p>It touches the working tree and the index, never commits. When you just want one file back to its last committed state, this is the command.</p>
+<h2 id="sec-4">git checkout (or switch): changing branches</h2>
+<p>These days <code>checkout</code> is mostly for branches, and Git actively suggests the dedicated commands for the other jobs:</p>
+<pre><code>git switch feature-x       # switch to an existing branch
+git switch -c new-branch    # create and switch
+git checkout -- file.py     # old-style restore, still works</code></pre>
+<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<h2 id="sec-5">Which one do I need?</h2>
+<ul>
+<li><b>Undo a commit I have not pushed</b> — <code>git reset --mixed HEAD~1</code> to keep changes, <code>--hard</code> to throw them away</li>
+<li><b>Undo a commit already on the shared branch</b> — <code>git revert &lt;commit&gt;</code></li>
+<li><b>Throw away my edits to one file</b> — <code>git restore file</code></li>
+<li><b>Unstage but keep the edits</b> — <code>git restore --staged file</code></li>
+<li><b>Switch what I am working on</b> — <code>git switch branch</code></li>
+</ul>
+<p>Rule of thumb: history other people can see gets reverted; history that only exists on your machine can be reset; files are restored. When these commands run automatically in CI, they appear as steps in <a href="/posts/github-actions-beginners.html">GitHub Actions for beginners</a>.</p>
+<div class="author"><div class="ava">N</div><div><b>Naresh</b><p>Software developer (B.Tech, CSE) writing practical guides on streaming, web dev and developer tools — based on things actually built. Questions? <a href="/contact.html">Get in touch</a>.</p></div></div><p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Tutorials</h2><ul><li><a href="/posts/rtsp-camera-to-browser-webrtc.html">How to Stream an RTSP Camera to Your Browser with WebRTC</a></li><li><a href="/posts/vs-code-extensions-that-save-time.html">10 VS Code Extensions That Save Time Every Day</a></li><li><a href="/posts/build-ai-security-camera-webrtc.html">Build Your Own AI Security Camera with WebRTC (Step by Step)</a></li></ul><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"git revert vs reset vs restore: Which One When","description":"The four Git commands people mix up \u2014 reset, revert, restore and checkout \u2014 with the exact cases each one belongs to.","datePublished":"2026-10-27","author":{"@type":"Person","name":"Naresh"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://codecrumbs.pages.dev/posts/git-revert-vs-reset-explained"},"publisher":{"@type":"Organization","name":"CodeCrumbs"}}</script></article></main>
+<footer><div class="wrap">
+<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a><a href="/feed.xml">RSS</a>
+<p>&copy; 2026 CodeCrumbs. All rights reserved.</p></div></footer>
+</body></html>

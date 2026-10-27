@@ -1,0 +1,67 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>curl Commands Every Developer Should Know (Cheatsheet) | CodeCrumbs</title>
+<meta name="description" content="Fifteen practical curl examples: headers, POST, JSON, auth, downloads, timing and status codes — copy and run.">
+<link rel="canonical" href="https://codecrumbs.pages.dev/posts/curl-commands-cheatsheet">
+<meta property="og:title" content="curl Commands Every Developer Should Know (Cheatsheet) | CodeCrumbs"><meta property="og:description" content="Fifteen practical curl examples: headers, POST, JSON, auth, downloads, timing and status codes — copy and run."><meta property="og:type" content="website"><meta property="og:url" content="https://codecrumbs.pages.dev/posts/curl-commands-cheatsheet"><meta property="og:image" content="https://codecrumbs.pages.dev/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f766e">
+<link rel="alternate" type="application/rss+xml" title="CodeCrumbs RSS" href="/feed.xml">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CodeCrumbs","url":"https://codecrumbs.pages.dev","description":"Practical coding tutorials, tools & dev setups","author":{"@type":"Person","name":"Naresh"}}</script>
+<meta name="google-site-verification" content="9x7RghWpi0kminI4rFGYUH-Tx90gLiBHoBJuTrwSBMY">
+
+<!-- AdSense: set adsense_pub_id in config.json and rebuild -->
+
+</head><body>
+<div id="progress"></div><script>addEventListener("scroll",function(){var h=document.documentElement,w=document.getElementById("progress");w.style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%";});</script>
+<header><div class="wrap bar"><a class="logo" href="/">Code<span>Crumbs</span></a>
+<nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
+<main class="wrap"><article><h1>curl Commands Every Developer Should Know (Cheatsheet)</h1><p class="meta">By Naresh · October 27, 2026 · <a href="/category/tutorials.html">Tutorials</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">Check a URL and its headers</a></li><li><a href="#sec-2">POST data and JSON</a></li><li><a href="#sec-3">Follow redirects, send auth</a></li><li><a href="#sec-4">Download like a pro</a></li><li><a href="#sec-5">Uploads, compression, timing</a></li><li><a href="#sec-6">Quick reference</a></li></ul></nav>
+<p>curl ships with every Linux and macOS machine, needs no install, and can do almost anything an HTTP client can: poke an API, download a file, test auth, measure response time. These are the forms you will actually type.</p>
+<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<h2 id="sec-1">Check a URL and its headers</h2>
+<pre><code>curl -I https://example.com
+curl -s -o /dev/null -w "%{http_code}\n" https://example.com
+curl -s https://api.github.com/repos/python/cpython | head -20</code></pre>
+<p>The first line fetches only the headers. The second prints just the status code — perfect for scripts and health checks (<code>-s</code> silences the progress bar; add <code>-S</code> to keep errors visible).</p>
+<h2 id="sec-2">POST data and JSON</h2>
+<pre><code>curl -X POST https://httpbin.org/post -d "name=naresh"
+
+curl -X POST https://httpbin.org/post \
+  -H "Content-Type: application/json" \
+  -d '{"language":"python","level":"intermediate"}'</code></pre>
+<p><code>-d</code> sends the body, <code>-H</code> sets any header. When the body starts with <code>@</code> you can send a whole file: <code>-d @payload.json</code>.</p>
+<h2 id="sec-3">Follow redirects, send auth</h2>
+<pre><code>curl -L https://short.link/x                # follow 301/302 hops
+curl -u user:token https://api.example.com   # basic auth
+curl -H "Authorization: Bearer TOKEN" https://api.example.com/me</code></pre>
+<p>Without <code>-L</code>, curl stops at the first redirect and hands you an empty 301 — the single most common curl "bug".</p>
+<h2 id="sec-4">Download like a pro</h2>
+<pre><code>curl -O https://example.com/big.iso          # keep remote filename
+curl -o local.zip https://example.com/file   # choose the filename
+curl -C - -O https://example.com/big.iso     # resume an interrupted download
+curl -sSL -o lib.zip https://example.com/lib --retry 3</code></pre>
+<p><code>-C -</code> continues where a stopped download left off, and <code>--retry</code> rides out flaky networks. Both belong in any script that fetches big files.</p>
+<div class="ad-slot"><!-- PASTE AD CODE HERE (AdSense / Ezoic / Media.net) -->Advertisement</div>
+<h2 id="sec-5">Uploads, compression, timing</h2>
+<pre><code>curl -F "file=@photo.png" https://example.com/upload
+curl --compressed https://example.com/page          # accept gzip/br
+curl -o /dev/null -s -w "total: %{time_total}s\n" https://example.com
+curl -v https://example.com 2>&amp;1 | head -30         # full request/response trace</code></pre>
+<p>The timing line reports total seconds for DNS, connect, TLS and transfer — useful when you are comparing hosts, as in <a href="/posts/speed-up-website-quick-wins.html">the website speed checklist</a>.</p>
+<h2 id="sec-6">Quick reference</h2>
+<ul>
+<li><b>Headers:</b> <code>-I</code> · <b>status only:</b> <code>-w "%{http_code}"</code></li>
+<li><b>POST:</b> <code>-X POST -d ...</code> · <b>JSON:</b> add <code>-H "Content-Type: application/json"</code></li>
+<li><b>Redirects:</b> <code>-L</code> · <b>quiet:</b> <code>-s</code> · <b>verbose:</b> <code>-v</code></li>
+<li><b>Download:</b> <code>-O</code> / <code>-o</code> · <b>resume:</b> <code>-C -</code> · <b>retry:</b> <code>--retry 3</code></li>
+<li><b>Timing:</b> <code>-w "%{time_total}"</code> · <b>gzip:</b> <code>--compressed</code></li>
+</ul>
+<p>One warning: <code>-k</code> / <code>--insecure</code> skips certificate checks. Fine against your own localhost server, never in a script that talks to the real internet.</p>
+<div class="author"><div class="ava">N</div><div><b>Naresh</b><p>Software developer (B.Tech, CSE) writing practical guides on streaming, web dev and developer tools — based on things actually built. Questions? <a href="/contact.html">Get in touch</a>.</p></div></div><p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Tutorials</h2><ul><li><a href="/posts/rtsp-camera-to-browser-webrtc.html">How to Stream an RTSP Camera to Your Browser with WebRTC</a></li><li><a href="/posts/vs-code-extensions-that-save-time.html">10 VS Code Extensions That Save Time Every Day</a></li><li><a href="/posts/build-ai-security-camera-webrtc.html">Build Your Own AI Security Camera with WebRTC (Step by Step)</a></li></ul><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"curl Commands Every Developer Should Know (Cheatsheet)","description":"Fifteen practical curl examples: headers, POST, JSON, auth, downloads, timing and status codes \u2014 copy and run.","datePublished":"2026-10-27","author":{"@type":"Person","name":"Naresh"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://codecrumbs.pages.dev/posts/curl-commands-cheatsheet"},"publisher":{"@type":"Organization","name":"CodeCrumbs"}}</script></article></main>
+<footer><div class="wrap">
+<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a><a href="/feed.xml">RSS</a>
+<p>&copy; 2026 CodeCrumbs. All rights reserved.</p></div></footer>
+</body></html>
