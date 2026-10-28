@@ -1,0 +1,61 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DNS Records Explained: A, CNAME, TXT, MX Without the Jargon | CodeCrumbs</title>
+<meta name="description" content="What each DNS record does, where to put it, and why your domain &#x27;isn&#x27;t working yet&#x27; when you just changed something.">
+<link rel="canonical" href="https://codecrumbs.pages.dev/posts/dns-records-explained">
+<meta property="og:title" content="DNS Records Explained: A, CNAME, TXT, MX Without the Jargon | CodeCrumbs"><meta property="og:description" content="What each DNS record does, where to put it, and why your domain &#x27;isn&#x27;t working yet&#x27; when you just changed something."><meta property="og:type" content="article"><meta property="og:url" content="https://codecrumbs.pages.dev/posts/dns-records-explained"><meta property="og:image" content="https://codecrumbs.pages.dev/og.png"><meta property="article:published_time" content="2026-10-27T00:00:00+00:00"><meta property="article:section" content="Hosting &amp; Web"><meta property="article:author" content="Naresh">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f766e">
+<link rel="alternate" type="application/rss+xml" title="CodeCrumbs RSS" href="/feed.xml">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CodeCrumbs","url":"https://codecrumbs.pages.dev","description":"Practical coding tutorials, tools & dev setups","author":{"@type":"Person","name":"Naresh"}}</script>
+<meta name="google-site-verification" content="9x7RghWpi0kminI4rFGYUH-Tx90gLiBHoBJuTrwSBMY">
+
+<!-- AdSense: set adsense_pub_id in config.json and rebuild -->
+
+</head><body>
+<div id="progress"></div><script>addEventListener("scroll",function(){var h=document.documentElement,w=document.getElementById("progress");w.style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%";});</script>
+<header><div class="wrap bar"><a class="logo" href="/">Code<span>Crumbs</span></a>
+<nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
+<main class="wrap"><article><h1>DNS Records Explained: A, CNAME, TXT, MX Without the Jargon</h1><p class="meta">By Naresh · October 27, 2026 · <a href="/category/hosting-web.html">Hosting & Web</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">The records you will actually touch</a></li><li><a href="#sec-2">Name conventions</a></li><li><a href="#sec-3">Propagation is really just caching</a></li><li><a href="#sec-4">Check what the world sees</a></li><li><a href="#sec-5">Common setups, end to end</a></li></ul></nav>
+<p>DNS is the internet's phone book, and almost every "my site doesn't open" moment is a DNS mistake: wrong record type, wrong name, or impatience with caching. Fifteen minutes here saves hours later.</p>
+<div class="ad-slot">Advertisement</div>
+<h2 id="sec-1">The records you will actually touch</h2>
+<h3>A / AAAA</h3>
+<p>Points a name at an IP address. <code>A</code> = IPv4 (<code>203.0.113.10</code>), <code>AAAA</code> = IPv6. Typical setup: <code>@</code> (the bare domain) → A → your server IP.</p>
+<h3>CNAME</h3>
+<p>Points a name at another <i>name</i>. <code>www</code> → <code>yourdomain.com.</code> means "whatever yourdomain resolves to, use that too". Handy because the IP can change in one place. Caveat: most registrars refuse a CNAME on the apex (<code>@</code>) because it breaks mail and verification lookups — use an A record, or flattening where your DNS host offers it (Cloudflare flattens apex CNAMEs automatically).</p>
+<h3>TXT</h3>
+<p>Free-form text, used for proof of ownership (Google/Bing site verification), email anti-spam (SPF/DKIM), and other services saying "yes, this domain belongs to this account". You will add TXT records any time a service asks you to "verify your domain".</p>
+<h3>MX</h3>
+<p>Where email goes. Each MX has a priority number — lower wins. Get these right before pointing a domain you rely on for mail.</p>
+<h3>NS</h3>
+<p>Delegates the whole domain (or subdomain) to a set of nameservers. Changing NS is how you move a domain from your registrar's default DNS to Cloudflare, and it is the slowest change to take effect.</p>
+<h2 id="sec-2">Name conventions</h2>
+<pre><code>@        the bare domain (example.com)
+www      the www subdomain
+*        wildcard: matches anything else
+mail     a custom name: mail.example.com</code></pre>
+<h2 id="sec-3">Propagation is really just caching</h2>
+<p>There is no global "propagation switch". Every resolver caches answers for the record's TTL (time to live) — from seconds to a day. Lower TTL to 300 <i>before</i> a planned change, make the change, raise it afterwards. Digging around the world takes minutes; waiting out someone's long TTL takes hours.</p>
+<div class="ad-slot">Advertisement</div>
+<h2 id="sec-4">Check what the world sees</h2>
+<pre><code>dig A example.com            # the A record, as your resolver sees it
+dig +short CNAME www.example.com
+dig NS example.com           # who serves DNS
+nslookup -type=txt example.com
+curl -sI https://example.com | head -5    # does the site answer?</code></pre>
+<p>If the panel says one thing and <code>dig</code> says another, the panel is right and your resolver has an old copy — try another network or wait out the TTL.</p>
+<h2 id="sec-5">Common setups, end to end</h2>
+<ul>
+<li><b>Site on Cloudflare Pages:</b> no A record needed — set NS to Cloudflare and add the apex + www as CNAMEs pointing at <code>yourproject.pages.dev</code> (Cloudflare flattens the apex). Full walkthrough: <a href="/posts/point-domain-to-cloudflare-pages.html">point a domain to Cloudflare Pages</a>.</li>
+<li><b>Server with a fixed IP:</b> apex A record → IP, www CNAME → apex, MX only if you run mail.</li>
+<li><b>Verification TXT:</b> copy the exact value the service gives you; these are case-sensitive.</li>
+</ul>
+<p>That's the whole mental model: names map to IPs (A/AAAA) or other names (CNAME), text proves ownership (TXT), mail has its own lane (MX), and everything is cached for its TTL. Once that lands, the platform comparisons like <a href="/posts/github-pages-vs-cloudflare-pages.html">GitHub Pages vs Cloudflare Pages</a> stop being abstract.</p>
+<div class="author"><div class="ava">N</div><div><b>Naresh</b><p>Software developer (B.Tech, CSE) writing practical guides on streaming, web dev and developer tools — based on things actually built. Questions? <a href="/contact.html">Get in touch</a>.</p></div></div><p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Hosting & Web</h2><ul><li><a href="/posts/free-hosting-for-developers.html">Free Hosting for Developers: Where to Put Your Projects</a></li><li><a href="/posts/github-pages-vs-cloudflare-pages.html">GitHub Pages vs Cloudflare Pages in 2026: Which Free Host Fits Your Site?</a></li><li><a href="/posts/point-domain-to-cloudflare-pages.html">How to Point Your Domain to Cloudflare Pages (Step by Step)</a></li></ul><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"DNS Records Explained: A, CNAME, TXT, MX Without the Jargon","description":"What each DNS record does, where to put it, and why your domain 'isn't working yet' when you just changed something.","datePublished":"2026-10-27","author":{"@type":"Person","name":"Naresh"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://codecrumbs.pages.dev/posts/dns-records-explained"},"publisher":{"@type":"Organization","name":"CodeCrumbs"}}</script></article></main>
+<footer><div class="wrap">
+<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a><a href="/feed.xml">RSS</a>
+<p>&copy; 2026 CodeCrumbs. All rights reserved.</p></div></footer>
+</body></html>

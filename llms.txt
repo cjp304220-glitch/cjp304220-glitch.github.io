@@ -1,0 +1,40 @@
+# CodeCrumbs
+
+> Practical coding tutorials, tools & dev setups. 28 practical guides for developers: AI tools, coding tutorials, hosting and desk gear. Free, no login.
+
+## Posts
+
+- [Netlify vs Vercel vs Cloudflare Pages (2026): Which Free Tier Actually Lasts?](https://codecrumbs.pages.dev/posts/netlify-vs-vercel-vs-cloudflare-pages): Three great free hosts, three very different limit philosophies — credits, quotas and unlimited. A side-by-side based on current 2026 pricing, and how to pick in one question.
+- [How to Point Your Domain to Cloudflare Pages (Step by Step)](https://codecrumbs.pages.dev/posts/point-domain-to-cloudflare-pages): You bought a domain anywhere. Here is how to serve it from Cloudflare Pages with free HTTPS, and the one setting most people forget afterwards.
+- [GitHub Pages vs Cloudflare Pages in 2026: Which Free Host Fits Your Site?](https://codecrumbs.pages.dev/posts/github-pages-vs-cloudflare-pages): Both are free forever and serve static sites over HTTPS. A practical comparison of limits, deploy flow and URL behavior, plus which one to pick for a blog, docs or a portfolio.
+- [Build Your Own AI Security Camera with WebRTC (Step by Step)](https://codecrumbs.pages.dev/posts/build-ai-security-camera-webrtc): Turn any IP camera into a smart camera: live WebRTC view in the browser plus AI person detection with Python, all running at home.
+- [Best AI Coding Agents in 2026: Claude Code vs Codex vs Cursor vs Copilot](https://codecrumbs.pages.dev/posts/best-ai-coding-agents-2026): A plain-English comparison of the AI coding agents developers actually use in 2026: what each is good at, how they're priced, and which to pick.
+- [Free AI Coding Tools for Students and Beginners (2026)](https://codecrumbs.pages.dev/posts/free-ai-coding-tools-for-students): You don't need to pay to code with AI. These free tools and student offers cover autocomplete, chat and full coding agents.
+- [On-Device AI Phones Explained: What They Actually Do Without the Internet](https://codecrumbs.pages.dev/posts/on-device-ai-phones-explained): Every new phone claims 'on-device AI'. Here's what that really means, which features work offline, and whether it should affect what you buy.
+- [How to Write Prompts That Get Real Code from AI](https://codecrumbs.pages.dev/posts/prompt-engineering-for-developers): A practical prompt structure for coding assistants: context, constraints, format — and the habits that keep the output trustworthy.
+- [DNS Records Explained: A, CNAME, TXT, MX Without the Jargon](https://codecrumbs.pages.dev/posts/dns-records-explained): What each DNS record does, where to put it, and why your domain 'isn't working yet' when you just changed something.
+- [SSH for Beginners: Keys, Config and Tunnels](https://codecrumbs.pages.dev/posts/ssh-for-beginners): Stop typing passwords: generate keys, set up aliases, copy files securely, and forward ports with SSH.
+- [Regular Expressions Explained Simply (Cheatsheet)](https://codecrumbs.pages.dev/posts/regex-cheatsheet): The regex syntax developers actually use — matching patterns, extracting text, and the dozen recipes you reuse forever.
+- [Best Webcam for Streaming and Dev Demos (What Actually Matters)](https://codecrumbs.pages.dev/posts/best-webcam-for-streaming): Resolution, framerate, autofocus and light — the specs that decide webcam quality, plus what to buy at each budget.
+- [ChatGPT vs Claude vs Gemini: Which Is Best for Developers in 2026?](https://codecrumbs.pages.dev/posts/chatgpt-vs-claude-vs-gemini): A practical comparison of the three major AI assistants for coding help: free tiers, strengths, and which one to reach for by task.
+- [30 Linux Commands You'll Actually Use (Cheatsheet)](https://codecrumbs.pages.dev/posts/linux-commands-cheatsheet): Files, searching, permissions, processes, networking — the terminal commands developers type every day, with plain-English explanations.
+- [Docker for Beginners: Containers Explained Simply](https://codecrumbs.pages.dev/posts/docker-for-beginners): What a container actually is, and the ten Docker commands you need to run, build and ship your first app.
+- [curl Commands Every Developer Should Know (Cheatsheet)](https://codecrumbs.pages.dev/posts/curl-commands-cheatsheet): Fifteen practical curl examples: headers, POST, JSON, auth, downloads, timing and status codes — copy and run.
+- [git revert vs reset vs restore: Which One When](https://codecrumbs.pages.dev/posts/git-revert-vs-reset-explained): The four Git commands people mix up — reset, revert, restore and checkout — with the exact cases each one belongs to.
+- [How to Make Your Website Faster: 9 Quick Wins That Actually Move Metrics](https://codecrumbs.pages.dev/posts/speed-up-website-quick-wins): Measure first, then fix the big four: images, fonts, scripts and caching. A practical speed checklist for static sites and simple apps, ordered by impact.
+- [How to Choose a Monitor for Programming (Without Wasting Money)](https://codecrumbs.pages.dev/posts/choose-monitor-for-programming): Resolution, panel type, text clarity and ergonomics — what actually matters when you stare at code eight hours a day, plus the specs you can safely ignore.
+- [Python Virtual Environments Explained (venv in 10 Minutes)](https://codecrumbs.pages.dev/posts/python-venv-explained): Stop breaking your system Python. Create an isolated environment per project, install packages into it, and share it with requirements.txt — with copy-paste commands.
+- [GitHub Actions for Beginners: Automate the Boring Stuff](https://codecrumbs.pages.dev/posts/github-actions-beginners): Your first workflow in ten minutes: run checks on every push, schedule jobs, and store secrets, with a copyable YAML template.
+- [Mechanical vs Membrane vs Low-Profile: How to Choose a Keyboard for Programming](https://codecrumbs.pages.dev/posts/choose-keyboard-for-programming): Switch types, layouts and the features that actually matter when you type all day. A practical, brand-agnostic guide for developers.
+- [Run AI Models on Your Own Computer with Ollama (Step by Step)](https://codecrumbs.pages.dev/posts/run-llm-locally-ollama): Ollama runs large language models locally for free: private, offline, and with no API bill. Install it, pull a model, and start chatting in minutes.
+- [Open-Source AI Coding Agents You Can Run Yourself](https://codecrumbs.pages.dev/posts/open-source-ai-coding-agents): OpenCode, Cline, Goose, OpenHands and more: free, open-source AI coding agents, what each does, and how to choose.
+- [Home Coding Setup: Essentials That Make a Real Difference](https://codecrumbs.pages.dev/posts/home-coding-setup-essentials): The desk upgrades that actually improve comfort and focus for programmers, in order of impact.
+- [10 VS Code Extensions That Save Time Every Day](https://codecrumbs.pages.dev/posts/vs-code-extensions-that-save-time): The VS Code extensions worth installing first: formatting, linting, Git history, API testing and more.
+- [Free Hosting for Developers: Where to Put Your Projects](https://codecrumbs.pages.dev/posts/free-hosting-for-developers): A practical comparison of free hosting options for static sites, side projects and portfolios, and when it's worth paying.
+- [How to Stream an RTSP Camera to Your Browser with WebRTC](https://codecrumbs.pages.dev/posts/rtsp-camera-to-browser-webrtc): Browsers can't play RTSP directly. Here's how to bridge an IP camera to a web page with low latency using WebRTC.
+
+## Pages
+
+- [About](https://codecrumbs.pages.dev/about.html)
+- [Contact](https://codecrumbs.pages.dev/contact.html)
+- [RSS](https://codecrumbs.pages.dev/feed.xml)

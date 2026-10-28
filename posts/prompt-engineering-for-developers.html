@@ -1,0 +1,53 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to Write Prompts That Get Real Code from AI | CodeCrumbs</title>
+<meta name="description" content="A practical prompt structure for coding assistants: context, constraints, format — and the habits that keep the output trustworthy.">
+<link rel="canonical" href="https://codecrumbs.pages.dev/posts/prompt-engineering-for-developers">
+<meta property="og:title" content="How to Write Prompts That Get Real Code from AI | CodeCrumbs"><meta property="og:description" content="A practical prompt structure for coding assistants: context, constraints, format — and the habits that keep the output trustworthy."><meta property="og:type" content="article"><meta property="og:url" content="https://codecrumbs.pages.dev/posts/prompt-engineering-for-developers"><meta property="og:image" content="https://codecrumbs.pages.dev/og.png"><meta property="article:published_time" content="2026-10-27T00:00:00+00:00"><meta property="article:section" content="AI Tools"><meta property="article:author" content="Naresh">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f766e">
+<link rel="alternate" type="application/rss+xml" title="CodeCrumbs RSS" href="/feed.xml">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CodeCrumbs","url":"https://codecrumbs.pages.dev","description":"Practical coding tutorials, tools & dev setups","author":{"@type":"Person","name":"Naresh"}}</script>
+<meta name="google-site-verification" content="9x7RghWpi0kminI4rFGYUH-Tx90gLiBHoBJuTrwSBMY">
+
+<!-- AdSense: set adsense_pub_id in config.json and rebuild -->
+
+</head><body>
+<div id="progress"></div><script>addEventListener("scroll",function(){var h=document.documentElement,w=document.getElementById("progress");w.style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%";});</script>
+<header><div class="wrap bar"><a class="logo" href="/">Code<span>Crumbs</span></a>
+<nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
+<main class="wrap"><article><h1>How to Write Prompts That Get Real Code from AI</h1><p class="meta">By Naresh · October 27, 2026 · <a href="/category/ai-tools.html">AI Tools</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">The structure that works</a></li><li><a href="#sec-2">Context is king</a></li><li><a href="#sec-3">Ask for the format you want to review</a></li><li><a href="#sec-4">Iterate like a reviewer, not a gambler</a></li><li><a href="#sec-5">The trust rule</a></li><li><a href="#sec-6">A reusable template</a></li></ul></nav>
+<p>The difference between "meh" AI output and something you can merge usually isn't the model — it's what you put in front of it. Developers who treat prompting like filing a good bug report get dramatically better code.</p>
+<div class="ad-slot">Advertisement</div>
+<h2 id="sec-1">The structure that works</h2>
+<p>Every serious prompt has four parts:</p>
+<ul>
+<li><b>Context</b> — language, framework, versions, and how this code will be used</li>
+<li><b>The material</b> — the exact code, error text, schema or command that failed (paste it, do not describe it)</li>
+<li><b>The task</b> — one clear goal, stated once</li>
+<li><b>The output format</b> — what you want back: a diff, a single file, bullets of options, tests first</li>
+</ul>
+<p>Weak: "my API is slow, fix it". Strong: "This is our FastAPI endpoint (paste). It does N+1 queries on Postgres 15 — rewrite it to fetch in one query, keep the response shape identical, output only the changed function, do not add dependencies".</p>
+<h2 id="sec-2">Context is king</h2>
+<p>The assistant cannot see your repo. Paste the surrounding code that matters — the function, its caller, the type definitions. Mention versions explicitly; "React" versus "React 18 with hooks only" changes everything. If there is a house style (tabs, error conventions, no default exports), say so.</p>
+<h2 id="sec-3">Ask for the format you want to review</h2>
+<p>Reviewing diffs is faster than reviewing blobs. Useful instructions: "show only the changed lines", "give me three options with trade-offs before coding", "write the tests first, then the implementation", "explain each step in one sentence". This also keeps answers shorter — the number one complaint about AI output.</p>
+<div class="ad-slot">Advertisement</div>
+<h2 id="sec-4">Iterate like a reviewer, not a gambler</h2>
+<p>When output is wrong, do not immediately rewrite the whole prompt. Say what is wrong, exactly: "this assumes sync I/O but we're on asyncio" or "the variable you referenced doesn't exist in the pasted code". One round of precise feedback often fixes it — same as reviewing a junior's PR.</p>
+<h2 id="sec-5">The trust rule</h2>
+<p>AI writes plausible code, not verified code. It invents API methods that half-exist, and it is confidently wrong at the same tone as when it is right. So: run it, read the diff, test the edge cases (empty input, unicode, concurrent calls). The prompts that help most with this end with "list the edge cases this breaks" — then you verify those first.</p>
+<h2 id="sec-6">A reusable template</h2>
+<pre><code>Stack: Python 3.12, FastAPI, Postgres (asyncpg)
+Goal: &lt;one sentence&gt;
+Material: &lt;paste code / error / schema&gt;
+Constraints: no new dependencies; keep public API unchanged
+Output: diff only + 3 bullet risks</code></pre>
+<p>Fill that in thirty seconds and you will rarely need a second attempt. If you're picking which assistant to aim this at, the comparison in <a href="/posts/chatgpt-vs-claude-vs-gemini.html">ChatGPT vs Claude vs Gemini</a> is a good starting map — and for private code, run the same template against a local model via <a href="/posts/run-llm-locally-ollama.html">Ollama</a> instead.</p>
+<div class="author"><div class="ava">N</div><div><b>Naresh</b><p>Software developer (B.Tech, CSE) writing practical guides on streaming, web dev and developer tools — based on things actually built. Questions? <a href="/contact.html">Get in touch</a>.</p></div></div><p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in AI Tools</h2><ul><li><a href="/posts/best-ai-coding-agents-2026.html">Best AI Coding Agents in 2026: Claude Code vs Codex vs Cursor vs Copilot</a></li><li><a href="/posts/free-ai-coding-tools-for-students.html">Free AI Coding Tools for Students and Beginners (2026)</a></li><li><a href="/posts/open-source-ai-coding-agents.html">Open-Source AI Coding Agents You Can Run Yourself</a></li></ul><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Write Prompts That Get Real Code from AI","description":"A practical prompt structure for coding assistants: context, constraints, format \u2014 and the habits that keep the output trustworthy.","datePublished":"2026-10-27","author":{"@type":"Person","name":"Naresh"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://codecrumbs.pages.dev/posts/prompt-engineering-for-developers"},"publisher":{"@type":"Organization","name":"CodeCrumbs"}}</script></article></main>
+<footer><div class="wrap">
+<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a><a href="/feed.xml">RSS</a>
+<p>&copy; 2026 CodeCrumbs. All rights reserved.</p></div></footer>
+</body></html>
