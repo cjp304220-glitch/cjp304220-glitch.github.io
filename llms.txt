@@ -1,6 +1,6 @@
 # CodeCrumbs
 
-> Practical coding tutorials, tools & dev setups. 28 practical guides for developers: AI tools, coding tutorials, hosting and desk gear. Free, no login.
+> Practical coding tutorials, tools & dev setups. 32 practical guides for developers: AI tools, coding tutorials, hosting and desk gear. Free, no login.
 
 ## Posts
 
@@ -11,6 +11,10 @@
 - [Best AI Coding Agents in 2026: Claude Code vs Codex vs Cursor vs Copilot](https://codecrumbs.pages.dev/posts/best-ai-coding-agents-2026): A plain-English comparison of the AI coding agents developers actually use in 2026: what each is good at, how they're priced, and which to pick.
 - [Free AI Coding Tools for Students and Beginners (2026)](https://codecrumbs.pages.dev/posts/free-ai-coding-tools-for-students): You don't need to pay to code with AI. These free tools and student offers cover autocomplete, chat and full coding agents.
 - [On-Device AI Phones Explained: What They Actually Do Without the Internet](https://codecrumbs.pages.dev/posts/on-device-ai-phones-explained): Every new phone claims 'on-device AI'. Here's what that really means, which features work offline, and whether it should affect what you buy.
+- [GitHub Copilot Free: Setup, Limits and How to Use It Well](https://codecrumbs.pages.dev/posts/github-copilot-free-guide): Copilot's free tier now covers real work: completions, chat and explanations inside VS Code. Here is how to switch it on and use it without creating a mess.
+- [How HTTPS Works: SSL/TLS Certificates Explained](https://codecrumbs.pages.dev/posts/https-ssl-certificates-explained): What a certificate actually proves, why browsers trust it, and how you get one free — including on Cloudflare Pages.
+- [Git and GitHub for Beginners: Clone, Commit, Push, PR](https://codecrumbs.pages.dev/posts/git-and-github-for-beginners): The collaboration flow: how local commits become shared pull requests, and the few commands that cover 90% of team Git.
+- [Python requests: Calling APIs the Right Way](https://codecrumbs.pages.dev/posts/python-requests-tutorial): GET, POST, headers, timeouts and error handling with the requests library — plus the habits that keep scripts from hanging forever.
 - [How to Write Prompts That Get Real Code from AI](https://codecrumbs.pages.dev/posts/prompt-engineering-for-developers): A practical prompt structure for coding assistants: context, constraints, format — and the habits that keep the output trustworthy.
 - [DNS Records Explained: A, CNAME, TXT, MX Without the Jargon](https://codecrumbs.pages.dev/posts/dns-records-explained): What each DNS record does, where to put it, and why your domain 'isn't working yet' when you just changed something.
 - [SSH for Beginners: Keys, Config and Tunnels](https://codecrumbs.pages.dev/posts/ssh-for-beginners): Stop typing passwords: generate keys, set up aliases, copy files securely, and forward ports with SSH.

@@ -1,0 +1,86 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Python requests: Calling APIs the Right Way | CodeCrumbs</title>
+<meta name="description" content="GET, POST, headers, timeouts and error handling with the requests library — plus the habits that keep scripts from hanging forever.">
+<link rel="canonical" href="https://codecrumbs.pages.dev/posts/python-requests-tutorial">
+<meta property="og:title" content="Python requests: Calling APIs the Right Way | CodeCrumbs"><meta property="og:description" content="GET, POST, headers, timeouts and error handling with the requests library — plus the habits that keep scripts from hanging forever."><meta property="og:type" content="article"><meta property="og:url" content="https://codecrumbs.pages.dev/posts/python-requests-tutorial"><meta property="og:image" content="https://codecrumbs.pages.dev/og.png"><meta property="article:published_time" content="2026-10-28T00:00:00+00:00"><meta property="article:section" content="Tutorials"><meta property="article:author" content="Naresh">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f766e">
+<link rel="alternate" type="application/rss+xml" title="CodeCrumbs RSS" href="/feed.xml">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CodeCrumbs","url":"https://codecrumbs.pages.dev","description":"Practical coding tutorials, tools & dev setups","author":{"@type":"Person","name":"Naresh"}}</script>
+<meta name="google-site-verification" content="9x7RghWpi0kminI4rFGYUH-Tx90gLiBHoBJuTrwSBMY">
+
+<!-- AdSense: set adsense_pub_id in config.json and rebuild -->
+
+</head><body>
+<div id="progress"></div><script>addEventListener("scroll",function(){var h=document.documentElement,w=document.getElementById("progress");w.style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%";});</script>
+<header><div class="wrap bar"><a class="logo" href="/">Code<span>Crumbs</span></a>
+<nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
+<main class="wrap"><article><h1>Python requests: Calling APIs the Right Way</h1><p class="meta">By Naresh · October 28, 2026 · <a href="/category/tutorials.html">Tutorials</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">Install it (in a virtual environment)</a></li><li><a href="#sec-2">GET, and reading the response</a></li><li><a href="#sec-3">Query parameters safely</a></li><li><a href="#sec-4">POST JSON</a></li><li><a href="#sec-5">Handling the ways things fail</a></li><li><a href="#sec-6">Sessions for anything repeated</a></li><li><a href="#sec-7">Cheatsheet</a></li></ul></nav>
+<p>Almost every Python script eventually needs to talk to an API, and <code>requests</code> is the library that makes HTTP feel reasonable. Ten minutes of the right habits here saves you from scripts that hang silently at 3 a.m.</p>
+<div class="ad-slot">Advertisement</div>
+<h2 id="sec-1">Install it (in a virtual environment)</h2>
+<pre><code>python3 -m venv .venv
+source .venv/bin/activate
+pip install requests</code></pre>
+<p>Keeping it per-project is exactly what <a href="/posts/python-venv-explained.html">Python venv explained</a> is about — do that and you never fight version conflicts again.</p>
+<h2 id="sec-2">GET, and reading the response</h2>
+<pre><code>import requests
+
+r = requests.get("https://api.github.com/repos/python/cpython", timeout=10)
+print(r.status_code)      # 200
+print(r.headers.get("content-type"))
+data = r.json()           # parsed JSON (dict/list)
+print(data["full_name"])</code></pre>
+<p>Three rules: always pass <code>timeout=</code> (without it, requests waits forever), always check <code>r.status_code</code> or call <code>r.raise_for_status()</code>, and use <code>r.json()</code> instead of manual parsing. If the response is not JSON, <code>r.text</code> gives you the raw string.</p>
+<h2 id="sec-3">Query parameters safely</h2>
+<pre><code>params = {"q": "webrtc", "sort": "stars", "per_page": 5}
+r = requests.get("https://api.github.com/search/repositories", params=params, timeout=10)
+print(r.url)  # query string is built and URL-encoded for you</code></pre>
+<p>Never build query strings by hand with <code>f"..."</code> — encoding bugs (spaces, ampersands, unicode) are exactly what <code>params</code> handles for free. Same idea as using curl's <code>-G --data-urlencode</code> in the <a href="/posts/curl-commands-cheatsheet.html">curl cheatsheet</a>.</p>
+<h2 id="sec-4">POST JSON</h2>
+<pre><code>headers = {"Authorization": "Bearer TOKEN"}
+payload = {"name": "naresh", "role": "developer"}
+
+r = requests.post("https://httpbin.org/post",
+                  json=payload, headers=headers, timeout=10)
+print(r.status_code, r.json()["json"])</code></pre>
+<p><code>json=payload</code> serializes the dict and sets the Content-Type header. Do not use <code>data=payload</code> for JSON — that sends it as a form body and the server will reject it.</p>
+<div class="ad-slot">Advertisement</div>
+<h2 id="sec-5">Handling the ways things fail</h2>
+<pre><code>import requests
+from requests.exceptions import Timeout, ConnectionError, HTTPError
+
+try:
+    r = requests.get(url, timeout=5)
+    r.raise_for_status()
+except Timeout:
+    print("too slow")
+except HTTPError as e:
+    print("server said", e.response.status_code)
+except ConnectionError:
+    print("network down or DNS failed")</code></pre>
+<p>Catch the specific exceptions, not bare <code>Exception</code>. A retry loop with a couple of attempts and a timeout is usually all a cron-style script needs.</p>
+<h2 id="sec-6">Sessions for anything repeated</h2>
+<pre><code>s = requests.Session()
+s.headers.update({"Authorization": "Bearer TOKEN"})
+for page in range(1, 6):
+    r = s.get(API, params={"page": page}, timeout=10)
+    ...</code></pre>
+<p>A <code>Session</code> reuses the TCP/TLS connection and carries cookies and default headers between calls — several times faster for loops that hit the same API. That <code>{}</code> in the example is only there so the f-string generator renders literal braces in the dict literal — on your screen it is a normal dict.</p>
+<h2 id="sec-7">Cheatsheet</h2>
+<ul>
+<li><b>GET:</b> <code>requests.get(url, params=..., timeout=10)</code></li>
+<li><b>POST JSON:</b> <code>requests.post(url, json=payload, timeout=10)</code></li>
+<li><b>Auth:</b> <code>headers={"Authorization": "Bearer TOKEN"}</code></li>
+<li><b>Check:</b> <code>r.raise_for_status()</code> + <code>r.json()</code></li>
+<li><b>Never:</b> no timeout, no status check, <code>data=</code> for JSON</li>
+</ul>
+<p>If you outgrow polling, the next step is webhooks and background jobs — a pattern that shows up in <a href="/posts/github-actions-beginners.html">GitHub Actions</a> too.</p>
+<div class="author"><div class="ava">N</div><div><b>Naresh</b><p>Software developer (B.Tech, CSE) writing practical guides on streaming, web dev and developer tools — based on things actually built. Questions? <a href="/contact.html">Get in touch</a>.</p></div></div><p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Tutorials</h2><ul><li><a href="/posts/rtsp-camera-to-browser-webrtc.html">How to Stream an RTSP Camera to Your Browser with WebRTC</a></li><li><a href="/posts/vs-code-extensions-that-save-time.html">10 VS Code Extensions That Save Time Every Day</a></li><li><a href="/posts/build-ai-security-camera-webrtc.html">Build Your Own AI Security Camera with WebRTC (Step by Step)</a></li></ul><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Python requests: Calling APIs the Right Way","description":"GET, POST, headers, timeouts and error handling with the requests library \u2014 plus the habits that keep scripts from hanging forever.","datePublished":"2026-10-28","author":{"@type":"Person","name":"Naresh"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://codecrumbs.pages.dev/posts/python-requests-tutorial"},"publisher":{"@type":"Organization","name":"CodeCrumbs"}}</script></article></main>
+<footer><div class="wrap">
+<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a><a href="/feed.xml">RSS</a>
+<p>&copy; 2026 CodeCrumbs. All rights reserved.</p></div></footer>
+</body></html>

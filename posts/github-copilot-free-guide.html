@@ -1,0 +1,58 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GitHub Copilot Free: Setup, Limits and How to Use It Well | CodeCrumbs</title>
+<meta name="description" content="Copilot&#x27;s free tier now covers real work: completions, chat and explanations inside VS Code. Here is how to switch it on and use it without creating a mess.">
+<link rel="canonical" href="https://codecrumbs.pages.dev/posts/github-copilot-free-guide">
+<meta property="og:title" content="GitHub Copilot Free: Setup, Limits and How to Use It Well | CodeCrumbs"><meta property="og:description" content="Copilot&#x27;s free tier now covers real work: completions, chat and explanations inside VS Code. Here is how to switch it on and use it without creating a mess."><meta property="og:type" content="article"><meta property="og:url" content="https://codecrumbs.pages.dev/posts/github-copilot-free-guide"><meta property="og:image" content="https://codecrumbs.pages.dev/og.png"><meta property="article:published_time" content="2026-10-28T00:00:00+00:00"><meta property="article:section" content="AI Tools"><meta property="article:author" content="Naresh">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f766e">
+<link rel="alternate" type="application/rss+xml" title="CodeCrumbs RSS" href="/feed.xml">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CodeCrumbs","url":"https://codecrumbs.pages.dev","description":"Practical coding tutorials, tools & dev setups","author":{"@type":"Person","name":"Naresh"}}</script>
+<meta name="google-site-verification" content="9x7RghWpi0kminI4rFGYUH-Tx90gLiBHoBJuTrwSBMY">
+
+<!-- AdSense: set adsense_pub_id in config.json and rebuild -->
+
+</head><body>
+<div id="progress"></div><script>addEventListener("scroll",function(){var h=document.documentElement,w=document.getElementById("progress");w.style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%";});</script>
+<header><div class="wrap bar"><a class="logo" href="/">Code<span>Crumbs</span></a>
+<nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
+<main class="wrap"><article><h1>GitHub Copilot Free: Setup, Limits and How to Use It Well</h1><p class="meta">By Naresh · October 28, 2026 · <a href="/category/ai-tools.html">AI Tools</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">Switch it on (5 minutes)</a></li><li><a href="#sec-2">What the free tier covers</a></li><li><a href="#sec-3">Getting useful completions</a></li><li><a href="#sec-4">Reviewing AI code without getting burned</a></li><li><a href="#sec-5">Privacy: what gets sent</a></li><li><a href="#sec-6">Should you pay?</a></li></ul></nav>
+<p>You no longer need a paid plan to try the most integrated AI pair programmer. Copilot's free tier gives a monthly allowance of inline completions and chat inside your editor — enough for occasional use, and a clean way to decide whether the paid tier is worth it for you.</p>
+<div class="ad-slot">Advertisement</div>
+<h2 id="sec-1">Switch it on (5 minutes)</h2>
+<ol>
+<li>Sign in to GitHub in VS Code (Accounts icon, bottom left)</li>
+<li>Install the "GitHub Copilot" extension</li>
+<li>Accept the Copilot terms when prompted</li>
+<li>Start writing code — grey ghost text is an inline suggestion; <b>Tab</b> accepts</li>
+</ol>
+<p>Same extension works in Neovim, JetBrains IDEs and the GitHub website chat.</p>
+<h2 id="sec-2">What the free tier covers</h2>
+<ul>
+<li><b>Inline completions</b> — next-line and multi-line suggestions as you type</li>
+<li><b>Chat</b> — a side panel for questions, explanations and refactors</li>
+<li><b>Prompts</b> — select code and ask: explain, fix, document, generate tests</li>
+</ul>
+<p>Both have a monthly free allowance that resets (exact numbers move over time — check the GitHub plans page for current figures). When you hit the cap, you wait for the reset or upgrade; nothing breaks.</p>
+<h2 id="sec-3">Getting useful completions</h2>
+<p>Copilot reads your open files, comments and imports as context. That means:</p>
+<ul>
+<li>Write a comment describing the function before the function — <code># rate-limit API calls, retry twice on 5xx</code></li>
+<li>Name variables well; bad names produce bad guesses</li>
+<li>Open the related files (models, interfaces) so context is in view</li>
+<li>For anything subtle, switch to chat and paste the error — same tactics as <a href="/posts/prompt-engineering-for-developers.html">writing better prompts</a></li>
+</ul>
+<div class="ad-slot">Advertisement</div>
+<h2 id="sec-4">Reviewing AI code without getting burned</h2>
+<p>The failure mode is code that looks right: plausible API names, missing edge cases, silent swallowed errors. Before accepting a chunk: run it, check the diff like a colleague's PR, and specifically look at error handling and boundary conditions. Copilot is fast, not infallible — the same trust rule from the <a href="/posts/chatgpt-vs-claude-vs-gemini.html">assistant comparison</a> applies here.</p>
+<h2 id="sec-5">Privacy: what gets sent</h2>
+<p>For individuals, suggestions are powered by cloud models; GitHub states code from individuals is not used to train models, and there is a filtering layer for detecting secrets (keys, tokens) before a prompt is sent. Treat it like any cloud tool: do not open customer data or live credentials in a workspace you ask it to read. For private-company code, the paid Business/Enterprise tiers add policy controls; for fully local work, fall back to <a href="/posts/run-llm-locally-ollama.html">Ollama</a>.</p>
+<h2 id="sec-6">Should you pay?</h2>
+<p>Upgrade when the free allowance is a daily frustration, or when chat-heavy workflows (large refactors, test generation, codebase questions) pay for themselves in saved time. Skip it if you code a few hours a week — completions on the free tier plus a chat assistant are plenty. For the wider landscape of autonomous agents (beyond completions), see <a href="/posts/best-ai-coding-agents-2026.html">best AI coding agents 2026</a>.</p>
+<div class="author"><div class="ava">N</div><div><b>Naresh</b><p>Software developer (B.Tech, CSE) writing practical guides on streaming, web dev and developer tools — based on things actually built. Questions? <a href="/contact.html">Get in touch</a>.</p></div></div><p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in AI Tools</h2><ul><li><a href="/posts/best-ai-coding-agents-2026.html">Best AI Coding Agents in 2026: Claude Code vs Codex vs Cursor vs Copilot</a></li><li><a href="/posts/free-ai-coding-tools-for-students.html">Free AI Coding Tools for Students and Beginners (2026)</a></li><li><a href="/posts/open-source-ai-coding-agents.html">Open-Source AI Coding Agents You Can Run Yourself</a></li></ul><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"GitHub Copilot Free: Setup, Limits and How to Use It Well","description":"Copilot's free tier now covers real work: completions, chat and explanations inside VS Code. Here is how to switch it on and use it without creating a mess.","datePublished":"2026-10-28","author":{"@type":"Person","name":"Naresh"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://codecrumbs.pages.dev/posts/github-copilot-free-guide"},"publisher":{"@type":"Organization","name":"CodeCrumbs"}}</script></article></main>
+<footer><div class="wrap">
+<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a><a href="/feed.xml">RSS</a>
+<p>&copy; 2026 CodeCrumbs. All rights reserved.</p></div></footer>
+</body></html>

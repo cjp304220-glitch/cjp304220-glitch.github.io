@@ -1,0 +1,59 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How HTTPS Works: SSL/TLS Certificates Explained | CodeCrumbs</title>
+<meta name="description" content="What a certificate actually proves, why browsers trust it, and how you get one free — including on Cloudflare Pages.">
+<link rel="canonical" href="https://codecrumbs.pages.dev/posts/https-ssl-certificates-explained">
+<meta property="og:title" content="How HTTPS Works: SSL/TLS Certificates Explained | CodeCrumbs"><meta property="og:description" content="What a certificate actually proves, why browsers trust it, and how you get one free — including on Cloudflare Pages."><meta property="og:type" content="article"><meta property="og:url" content="https://codecrumbs.pages.dev/posts/https-ssl-certificates-explained"><meta property="og:image" content="https://codecrumbs.pages.dev/og.png"><meta property="article:published_time" content="2026-10-28T00:00:00+00:00"><meta property="article:section" content="Hosting &amp; Web"><meta property="article:author" content="Naresh">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f766e">
+<link rel="alternate" type="application/rss+xml" title="CodeCrumbs RSS" href="/feed.xml">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CodeCrumbs","url":"https://codecrumbs.pages.dev","description":"Practical coding tutorials, tools & dev setups","author":{"@type":"Person","name":"Naresh"}}</script>
+<meta name="google-site-verification" content="9x7RghWpi0kminI4rFGYUH-Tx90gLiBHoBJuTrwSBMY">
+
+<!-- AdSense: set adsense_pub_id in config.json and rebuild -->
+
+</head><body>
+<div id="progress"></div><script>addEventListener("scroll",function(){var h=document.documentElement,w=document.getElementById("progress");w.style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%";});</script>
+<header><div class="wrap bar"><a class="logo" href="/">Code<span>Crumbs</span></a>
+<nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
+<main class="wrap"><article><h1>How HTTPS Works: SSL/TLS Certificates Explained</h1><p class="meta">By Naresh · October 28, 2026 · <a href="/category/hosting-web.html">Hosting & Web</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">What HTTPS gives you</a></li><li><a href="#sec-2">The certificate in one paragraph</a></li><li><a href="#sec-3">Getting one: free, and usually automatic</a></li><li><a href="#sec-4">Certificates chained together</a></li><li><a href="#sec-5">How to check a site's cert</a></li><li><a href="#sec-6">Common myths, quickly</a></li></ul></nav>
+<p>The padlock icon rests on a surprisingly simple idea: your server proves it owns the domain, then both sides negotiate a private channel. Everything else is packaging that idea securely.</p>
+<div class="ad-slot">Advertisement</div>
+<h2 id="sec-1">What HTTPS gives you</h2>
+<ul>
+<li><b>Encryption</b> — anyone watching the network sees only garbage</li>
+<li><b>Authentication</b> — you are talking to the real site, not an impostor</li>
+<li><b>Integrity</b> — the response was not altered in flight</li>
+</ul>
+<p>Without HTTPS, Wi-Fi neighbours and ISPs can read and modify traffic; Chrome marks such sites "Not secure"; and some browser APIs refuse to run on HTTP at all.</p>
+<h2 id="sec-2">The certificate in one paragraph</h2>
+<p>A certificate is a small signed file binding your domain to a public key. The signature comes from a Certificate Authority (CA) — a party browsers and operating systems already trust. When you connect, the server presents the cert, the browser checks the signature chain, the hostname match and the expiry date, and only then does the TLS handshake proceed. No valid chain, no padlock.</p>
+<h2 id="sec-3">Getting one: free, and usually automatic</h2>
+<h3>Cloudflare (what this site uses)</h3>
+<p>Point your DNS to Cloudflare and Universal SSL issues and renews certificates for you — <code>yourdomain.com</code> and <code>www</code> covered, zero clicks. The full setup is in <a href="/posts/point-domain-to-cloudflare-pages.html">point a domain to Cloudflare Pages</a>.</p>
+<h3>Your own server: Let's Encrypt</h3>
+<pre><code>sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com</code></pre>
+<p>Certbot proves domain control (usually via an HTTP challenge), fetches a cert, configures nginx, and installs a cron job to renew before the 90-day expiry. Free, automated, and what nearly every modern host does under the hood.</p>
+<h2 id="sec-4">Certificates chained together</h2>
+<p>Your cert is not signed directly by the root CA — the root signs a few intermediates, and intermediates sign yours. Browsers ship with roots pre-trusted; servers must send the intermediate too, which is why "missing intermediate chain" is a classic first-time setup error. Managed hosts (Cloudflare, Netlify, Vercel) handle all of this invisibly.</p>
+<div class="ad-slot">Advertisement</div>
+<h2 id="sec-5">How to check a site's cert</h2>
+<pre><code>curl -sI https://example.com | head -5
+openssl s_client -connect example.com:443 -servername example.com &lt;/dev/null 2&gt;/dev/null \
+  | openssl x509 -noout -subject -dates</code></pre>
+<p>The openssl line prints who the cert is for and when it expires — useful before a long holiday. Or just click the padlock in the browser: it shows issuer, validity and the chain.</p>
+<h2 id="sec-6">Common myths, quickly</h2>
+<ul>
+<li><b>"HTTPS slows me down"</b> — one extra handshake, then HTTP/2 over the same connection is often faster overall</li>
+<li><b>"I don't collect payments, so I don't need it"</b> — authentication matters for every page, not just checkout</li>
+<li><b>"I'll add it later"</b> — modern tooling makes free certificates the default; adding it later is just… adding it now</li>
+</ul>
+<p>Where the DNS side lives (TXT verification, CNAMEs to your host) is covered in <a href="/posts/dns-records-explained.html">DNS records explained</a>; platform choices that include certificates in the box are compared in <a href="/posts/netlify-vs-vercel-vs-cloudflare-pages.html">Netlify vs Vercel vs Cloudflare Pages</a>.</p>
+<div class="author"><div class="ava">N</div><div><b>Naresh</b><p>Software developer (B.Tech, CSE) writing practical guides on streaming, web dev and developer tools — based on things actually built. Questions? <a href="/contact.html">Get in touch</a>.</p></div></div><p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Hosting & Web</h2><ul><li><a href="/posts/free-hosting-for-developers.html">Free Hosting for Developers: Where to Put Your Projects</a></li><li><a href="/posts/github-pages-vs-cloudflare-pages.html">GitHub Pages vs Cloudflare Pages in 2026: Which Free Host Fits Your Site?</a></li><li><a href="/posts/point-domain-to-cloudflare-pages.html">How to Point Your Domain to Cloudflare Pages (Step by Step)</a></li></ul><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How HTTPS Works: SSL/TLS Certificates Explained","description":"What a certificate actually proves, why browsers trust it, and how you get one free \u2014 including on Cloudflare Pages.","datePublished":"2026-10-28","author":{"@type":"Person","name":"Naresh"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://codecrumbs.pages.dev/posts/https-ssl-certificates-explained"},"publisher":{"@type":"Organization","name":"CodeCrumbs"}}</script></article></main>
+<footer><div class="wrap">
+<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a><a href="/feed.xml">RSS</a>
+<p>&copy; 2026 CodeCrumbs. All rights reserved.</p></div></footer>
+</body></html>
