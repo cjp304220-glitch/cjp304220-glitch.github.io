@@ -1,0 +1,48 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Static Site Generators in 2026: Hugo, Eleventy, Astro, Jekyll | CodeCrumbs</title>
+<meta name="description" content="What each generator optimizes for, who should use which, and why a fifty-line Python script can still beat all of them for a blog.">
+<link rel="canonical" href="https://codecrumbs.pages.dev/posts/static-site-generators-compared">
+<meta property="og:title" content="Static Site Generators in 2026: Hugo, Eleventy, Astro, Jekyll | CodeCrumbs"><meta property="og:description" content="What each generator optimizes for, who should use which, and why a fifty-line Python script can still beat all of them for a blog."><meta property="og:type" content="article"><meta property="og:url" content="https://codecrumbs.pages.dev/posts/static-site-generators-compared"><meta property="og:image" content="https://codecrumbs.pages.dev/og.png"><meta property="article:published_time" content="2026-10-29T00:00:00+00:00"><meta property="article:section" content="Hosting &amp; Web"><meta property="article:author" content="Naresh">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f766e">
+<link rel="alternate" type="application/rss+xml" title="CodeCrumbs RSS" href="/feed.xml">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CodeCrumbs","url":"https://codecrumbs.pages.dev","description":"Practical coding tutorials, tools & dev setups","author":{"@type":"Person","name":"Naresh"}}</script>
+<meta name="google-site-verification" content="9x7RghWpi0kminI4rFGYUH-Tx90gLiBHoBJuTrwSBMY">
+
+<!-- AdSense: set adsense_pub_id in config.json and rebuild -->
+
+</head><body>
+<div id="progress"></div><script>addEventListener("scroll",function(){var h=document.documentElement,w=document.getElementById("progress");w.style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%";});</script>
+<header><div class="wrap bar"><a class="logo" href="/">Code<span>Crumbs</span></a>
+<nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
+<main class="wrap"><article><h1>Static Site Generators in 2026: Hugo, Eleventy, Astro, Jekyll</h1><p class="meta">By Naresh · October 29, 2026 · <a href="/category/hosting-web.html">Hosting & Web</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">Hugo — speed and batteries included</a></li><li><a href="#sec-2">Eleventy (11ty) — simple and JavaScript-light</a></li><li><a href="#sec-3">Astro — modern pages with optional interactivity</a></li><li><a href="#sec-4">Jekyll — the GitHub Pages original</a></li><li><a href="#sec-5">Quick chooser</a></li><li><a href="#sec-6">The unsung option: a script you own</a></li><li><a href="#sec-7">Hosting and speed</a></li></ul></nav>
+<p>Static generators turn templates and Markdown into plain HTML you can host anywhere for free. They are faster, cheaper and more secure than any CMS — and the four names below cover almost every use case.</p>
+<div class="ad-slot">Advertisement</div>
+<h2 id="sec-1">Hugo — speed and batteries included</h2>
+<p>Written in Go; builds even large sites in well under a second. Templates are Go templates (a small learning curve), but it ships taxonomies, RSS, sitemaps and themes out of the box. Pick Hugo when you want lots of content, many taxonomy pages, and zero runtime.</p>
+<h2 id="sec-2">Eleventy (11ty) — simple and JavaScript-light</h2>
+<p>Plain JS config, no build client, template engines of your choice (Nunjucks, Liquid, Markdown). It stays out of your way and produces boring, excellent HTML. Pick Eleventy when you want control without adopting a framework.</p>
+<h2 id="sec-3">Astro — modern pages with optional interactivity</h2>
+<p>Components from React/Vue/Svelte that ship <b>zero JS by default</b>, with "islands" of interactivity where you need them. Pick Astro when the site is mostly content but some pages need real widgets. It is the default recommendation for new content-heavy projects in 2026.</p>
+<h2 id="sec-4">Jekyll — the GitHub Pages original</h2>
+<p>Ruby-based, template-free setup on GitHub Pages for years. Still fine; slower builds and a smaller theme ecosystem than Hugo. Pick Jekyll only if you are already in a Ruby shop or following an old tutorial.</p>
+<h2 id="sec-5">Quick chooser</h2>
+<ul>
+<li><b>Blog or docs, want it done today:</b> Astro or a Hugo theme</li>
+<li><b>1000+ pages, taxonomy-heavy:</b> Hugo</li>
+<li><b>Hand-rolled templates, no framework DNA:</b> Eleventy</li>
+<li><b>Existing GitHub Pages Jekyll site:</b> keep it, migrate only if it annoys you</li>
+</ul>
+<div class="ad-slot">Advertisement</div>
+<h2 id="sec-6">The unsung option: a script you own</h2>
+<p>This site — 36 posts, categories, RSS, sitemap, JSON-LD — is generated by a single ~400-line Python script: a dict of posts, a template function, and <code>build.py</code>. No framework upgrades, no dependency churn, and every feature exists because it was needed, not because a theme offered it. If your project is "articles plus a few static pages", write the generator; you will understand every byte you ship.</p>
+<h2 id="sec-7">Hosting and speed</h2>
+<p>Any of these deploy free to Cloudflare Pages, GitHub Pages, Netlify or Vercel — the differences are compared in <a href="/posts/netlify-vs-vercel-vs-cloudflare-pages.html">Netlify vs Vercel vs Cloudflare Pages</a>. Whatever you choose, measure with the checklist in <a href="/posts/speed-up-website-quick-wins.html">speed up your website</a>; static sites that follow it routinely score 95+ on PageSpeed.</p>
+<div class="author"><div class="ava">N</div><div><b>Naresh</b><p>Software developer (B.Tech, CSE) writing practical guides on streaming, web dev and developer tools — based on things actually built. Questions? <a href="/contact.html">Get in touch</a>.</p></div></div><p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in Hosting & Web</h2><ul><li><a href="/posts/free-hosting-for-developers.html">Free Hosting for Developers: Where to Put Your Projects</a></li><li><a href="/posts/github-pages-vs-cloudflare-pages.html">GitHub Pages vs Cloudflare Pages in 2026: Which Free Host Fits Your Site?</a></li><li><a href="/posts/point-domain-to-cloudflare-pages.html">How to Point Your Domain to Cloudflare Pages (Step by Step)</a></li></ul><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Static Site Generators in 2026: Hugo, Eleventy, Astro, Jekyll","description":"What each generator optimizes for, who should use which, and why a fifty-line Python script can still beat all of them for a blog.","datePublished":"2026-10-29","author":{"@type":"Person","name":"Naresh"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://codecrumbs.pages.dev/posts/static-site-generators-compared"},"publisher":{"@type":"Organization","name":"CodeCrumbs"}}</script></article></main>
+<footer><div class="wrap">
+<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a><a href="/feed.xml">RSS</a>
+<p>&copy; 2026 CodeCrumbs. All rights reserved.</p></div></footer>
+</body></html>

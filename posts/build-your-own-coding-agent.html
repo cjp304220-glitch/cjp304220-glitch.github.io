@@ -1,0 +1,96 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Build Your Own Coding Agent in 100 Lines of Python | CodeCrumbs</title>
+<meta name="description" content="The agent loop demystified: a model, a tool list, and a while loop. Build one that reads files and runs commands — then understand every agent product on the market.">
+<link rel="canonical" href="https://codecrumbs.pages.dev/posts/build-your-own-coding-agent">
+<meta property="og:title" content="Build Your Own Coding Agent in 100 Lines of Python | CodeCrumbs"><meta property="og:description" content="The agent loop demystified: a model, a tool list, and a while loop. Build one that reads files and runs commands — then understand every agent product on the market."><meta property="og:type" content="article"><meta property="og:url" content="https://codecrumbs.pages.dev/posts/build-your-own-coding-agent"><meta property="og:image" content="https://codecrumbs.pages.dev/og.png"><meta property="article:published_time" content="2026-10-29T00:00:00+00:00"><meta property="article:section" content="AI Tools"><meta property="article:author" content="Naresh">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f766e">
+<link rel="alternate" type="application/rss+xml" title="CodeCrumbs RSS" href="/feed.xml">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CodeCrumbs","url":"https://codecrumbs.pages.dev","description":"Practical coding tutorials, tools & dev setups","author":{"@type":"Person","name":"Naresh"}}</script>
+<meta name="google-site-verification" content="9x7RghWpi0kminI4rFGYUH-Tx90gLiBHoBJuTrwSBMY">
+
+<!-- AdSense: set adsense_pub_id in config.json and rebuild -->
+
+</head><body>
+<div id="progress"></div><script>addEventListener("scroll",function(){var h=document.documentElement,w=document.getElementById("progress");w.style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+"%";});</script>
+<header><div class="wrap bar"><a class="logo" href="/">Code<span>Crumbs</span></a>
+<nav><a href="/">Home</a><a href="/category/ai-tools.html">AI Tools</a><a href="/category/tutorials.html">Tutorials</a><a href="/category/gadgets.html">Gadgets</a><a href="/category/hosting-web.html">Hosting</a></nav></div></header>
+<main class="wrap"><article><h1>Build Your Own Coding Agent in 100 Lines of Python</h1><p class="meta">By Naresh · October 29, 2026 · <a href="/category/ai-tools.html">AI Tools</a></p><nav class="toc"><b>On this page</b><ul><li><a href="#sec-1">The loop</a></li><li><a href="#sec-2">The agent, ~100 lines</a></li><li><a href="#sec-3">Safety is the hard part</a></li><li><a href="#sec-4">Where to take it next</a></li></ul></nav>
+<p>Every "AI coding agent" — the kind that plans, edits files and runs commands — is the same three parts: a language model, a set of tools, and a loop that feeds tool results back until the task is done. Build a tiny one and the magic evaporates.</p>
+<div class="ad-slot">Advertisement</div>
+<h2 id="sec-1">The loop</h2>
+<pre><code>user task
+  → model (sees task + tool list)
+      → model returns text          → done
+      → model requests a tool call  → run it locally
+                                   → append result, ask model again</code></pre>
+<p>The model never touches your machine directly. <i>You</i> run the tool it asked for and paste the output back. That constraint is why the tool design matters more than the prompt.</p>
+<h2 id="sec-2">The agent, ~100 lines</h2>
+<pre><code>import json, subprocess, os
+from openai import OpenAI  # any OpenAI-compatible endpoint works
+
+client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
+MODEL = "llama3.1"
+
+def run_command(args):
+    '''Run a whitelisted shell command, return its output.'''
+    cmd = args["cmd"]
+    if not cmd.startswith(("ls ", "cat ", "grep ")):
+        return "Error: command not allowed"
+    out = subprocess.run(cmd, shell=True, capture_output=True,
+                         text=True, timeout=30)
+    return (out.stdout + out.stderr)[:4000]
+
+TOOLS = {
+    "type": "function",
+    "function": {
+        "name": "run_command",
+        "description": "Run a safe read-only shell command",
+        "parameters": {
+            "type": "object",
+            "properties": {"cmd": {"type": "string"}},
+            "required": ["cmd"],
+        },
+    },
+}
+
+def agent(task):
+    messages = [{"role": "user", "content": task}]
+    while True:
+        r = client.chat.completions.create(
+            model=MODEL, messages=messages, tools=[TOOLS])
+        msg = r.choices[0].message
+        messages.append(msg.model_dump())
+        if not msg.tool_calls:
+            print(msg.content)          # final answer
+            return
+        for call in msg.tool_calls:
+            args = json.loads(call.function.arguments)
+            print("&gt;&gt;", args)
+            result = run_command(args)
+            messages.append({
+                "role": "tool",
+                "tool_call_id": call.id,
+                "content": result,
+            })
+
+agent("List the files here and summarise what this project is")</code></pre>
+<p>That is the entire skeleton. Swap <code>run_command</code> for <code>read_file</code>, <code>write_file</code>, <code>search</code> — real agents are the same loop with more tools, better prompts and retries.</p>
+<div class="ad-slot">Advertisement</div>
+<h2 id="sec-3">Safety is the hard part</h2>
+<ul>
+<li><b>Whitelist tools.</b> Read-only by default; allow writes only in a sandbox folder</li>
+<li><b>Never</b> give an unattended shell to the network or your home directory</li>
+<li>Cap loop iterations and command timeouts — models can thrash</li>
+<li>Show every tool call to the human; auto-approve is how incidents start</li>
+</ul>
+<h2 id="sec-4">Where to take it next</h2>
+<p>Point the same loop at bigger models and it behaves like a real assistant — compare the commercial versions in <a href="/posts/best-ai-coding-agents-2026.html">best AI coding agents</a>, and see <a href="/posts/run-llm-locally-ollama.html">Ollama</a> for running the model itself offline. The tool-calling prompts are the same discipline as <a href="/posts/prompt-engineering-for-developers.html">writing better prompts</a>. Building this once is the fastest way to stop trusting agent demos blindly — and the fastest way to trust your own.</p>
+<div class="author"><div class="ava">N</div><div><b>Naresh</b><p>Software developer (B.Tech, CSE) writing practical guides on streaming, web dev and developer tools — based on things actually built. Questions? <a href="/contact.html">Get in touch</a>.</p></div></div><p class="disclosure"><b>Need something like this built?</b> I take freelance projects in streaming, web apps and automation. <a href="/contact.html">Get in touch</a>.</p><h2>More in AI Tools</h2><ul><li><a href="/posts/best-ai-coding-agents-2026.html">Best AI Coding Agents in 2026: Claude Code vs Codex vs Cursor vs Copilot</a></li><li><a href="/posts/free-ai-coding-tools-for-students.html">Free AI Coding Tools for Students and Beginners (2026)</a></li><li><a href="/posts/open-source-ai-coding-agents.html">Open-Source AI Coding Agents You Can Run Yourself</a></li></ul><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Build Your Own Coding Agent in 100 Lines of Python","description":"The agent loop demystified: a model, a tool list, and a while loop. Build one that reads files and runs commands \u2014 then understand every agent product on the market.","datePublished":"2026-10-29","author":{"@type":"Person","name":"Naresh"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://codecrumbs.pages.dev/posts/build-your-own-coding-agent"},"publisher":{"@type":"Organization","name":"CodeCrumbs"}}</script></article></main>
+<footer><div class="wrap">
+<a href="/about.html">About</a><a href="/contact.html">Contact / Hire me</a><a href="/privacy.html">Privacy</a><a href="/disclosure.html">Affiliate disclosure</a><a href="/feed.xml">RSS</a>
+<p>&copy; 2026 CodeCrumbs. All rights reserved.</p></div></footer>
+</body></html>
